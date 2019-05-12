@@ -1,4 +1,4 @@
-package com.shu.designmodel.singleton;
+package com.shu.designpattern.singleton;
 
 /**
  * 饿汉模式

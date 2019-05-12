@@ -1,4 +1,4 @@
-package com.shu.designmodel.factory;
+package com.shu.designpattern.factory;
 
 public class Main {
     public static void main(String[] args)  {

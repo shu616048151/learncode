@@ -1,6 +1,4 @@
-package com.shu.designmodel.singleton;
-
-import javax.persistence.Id;
+package com.shu.designpattern.singleton;
 
 public class lanhan {
     private static lanhan lanhan;

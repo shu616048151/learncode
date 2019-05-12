@@ -1,4 +1,4 @@
-package com.shu.designmodel.factory;
+package com.shu.designpattern.factory;
 
 /**
  * 工厂设计模式

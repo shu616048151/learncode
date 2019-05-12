@@ -1,4 +1,4 @@
-package com.shu.designmodel.factory;
+package com.shu.designpattern.factory;
 
 public class AuDi extends Car {
     public String getName() {
