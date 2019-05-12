@@ -1,0 +1,28 @@
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!--<environments default="development">-->
+		<!--<environment id="development">-->
+			<!--<transactionManager type="JDBC"></transactionManager>-->
+			<!--<dataSource type="POOLED">-->
+				<!--<property name="driver" value="com.mysql.jdbc.Driver" />-->
+				<!--<property name="url"-->
+						  <!--value="jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8" />-->
+				<!--<property name="username" value="root" />-->
+				<!--<property name="password" value="123" />-->
+
+			<!--</dataSource>-->
+		<!--</environment>-->
+	<!--</environments>-->
+
+	<!--<mappers>-->
+		<!--&lt;!&ndash;三种加载mapper的方式+和spring整合的一种方式&ndash;&gt;-->
+		<!--<mapper resource="com/shu/mapper/UserMapper.xml"></mapper>-->
+		<!--&lt;!&ndash;class方式&ndash;&gt;-->
+		<!--&lt;!&ndash;<mapper class="com.shu.mapper.UserMapper"></mapper>&ndash;&gt;-->
+		<!--&lt;!&ndash;扫包的方式&ndash;&gt;-->
+		<!--&lt;!&ndash;<package name="com.shu.mapper"></package>&ndash;&gt;-->
+	<!--</mappers>-->
+</configuration>

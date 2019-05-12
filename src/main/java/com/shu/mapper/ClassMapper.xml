@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shu.mapper.ClassMapper">
+    <!--两种方式进行一对多-->
+    <resultMap id="classVo" type="com.shu.vo.ClassVo">
+        <id column="cid" property="cid" />
+        <result column="name" property="name"/>
+        <collection property="student" ofType="com.shu.domain.Student">
+            <id column="sid" property="sid"/>
+            <result column="sname" property="name"/>
+            <result column="scid" property="cid"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAll" resultMap="classVo">
+        select c.*,sid,s.name as sname,s.cid as scid  from class c, student s where c.cid=s.cid
+    </select>
+
+    <select id="getAll2" resultMap="classVo2">
+        select * from class
+    </select>
+    <select id="getStudent" parameterType="int" resultType="com.shu.domain.Student">
+        SELECT * from student where cid=#{cid}
+    </select>
+    <resultMap id="classVo2" type="com.shu.vo.ClassVo">
+        <id column="cid" property="cid" />
+        <result column="name" property="name"/>
+        <collection property="student" column="cid" ofType="com.shu.domain.Student" select="getStudent"></collection>
+    </resultMap>
+</mapper>
