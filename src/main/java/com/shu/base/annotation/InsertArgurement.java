@@ -1,7 +1,9 @@
-package com.shu.base.reflection;
+package com.shu.base.annotation;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Map;
 
 public class InsertArgurement {
@@ -64,4 +66,31 @@ public class InsertArgurement {
         return obj;
 
     }
+    public static <T> T map2Bean(Class<T> clazz,Map<String,Object> map){
+        Object t=null;
+        try {
+            t= clazz.newInstance();
+            Field[] declaredFields = clazz.getDeclaredFields();
+            for (Field field : declaredFields) {
+
+             if (map.containsKey(field.getName())){
+                 Object value = map.get(field.getName());
+                 if (value!=null){
+                     if (!Modifier.isPublic(field.getModifiers())){
+                         field.setAccessible(true);
+                     }
+                     field.set(t,value);
+                 }
+                }
+            }
+
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return (T) t;
+    }
+
 }
