@@ -1,4 +1,4 @@
-package com.shu.reflection;
+package com.shu.base.reflection;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

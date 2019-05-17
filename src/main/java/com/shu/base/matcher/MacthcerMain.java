@@ -1,4 +1,4 @@
-package com.shu.matcher;
+package com.shu.base.matcher;
 
 import org.junit.Test;
 

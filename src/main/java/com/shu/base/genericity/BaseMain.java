@@ -1,4 +1,4 @@
-package com.shu.genericity;
+package com.shu.base.genericity;
 
 public class BaseMain {
     public static void main(String[] args){

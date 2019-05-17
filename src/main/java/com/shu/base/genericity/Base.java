@@ -1,4 +1,4 @@
-package com.shu.genericity;
+package com.shu.base.genericity;
 
 public class Base<T> {
     private Class<T> entityClass;
@@ -18,8 +18,5 @@ public class Base<T> {
 
     public void setT(T t) {
         this.t = t;
-    }
-    public static <T> T test(T t){
-        return t;
     }
 }

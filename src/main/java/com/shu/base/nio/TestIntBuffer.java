@@ -1,6 +1,4 @@
-package com.shu.nio;
-
-import org.junit.Test;
+package com.shu.base.nio;
 
 import java.nio.IntBuffer;
 

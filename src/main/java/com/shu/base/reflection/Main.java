@@ -1,4 +1,4 @@
-package com.shu.reflection;
+package com.shu.base.reflection;
 
 
 import com.shu.domain.User;

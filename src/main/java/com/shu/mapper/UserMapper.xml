@@ -6,4 +6,12 @@
     <select id="getAll" resultType="com.shu.domain.User">
         select * from user
     </select>
+    <select id="getUserById" parameterType="int" resultType="com.shu.domain.User">
+         select * from user
+         <where>
+             <if test="id !=null">
+                 id =#{id}
+             </if>
+         </where>
+    </select>
 </mapper>
