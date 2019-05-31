@@ -12,6 +12,10 @@ import java.util.concurrent.*;
  * @uint d9lab
  * @Description:
  */
+
+/**
+ * 使用线程池的四种包装的静态方法。
+ */
 public class ThreadPooTest {
     public static void main(String[] args){
         long time1=System.currentTimeMillis();
@@ -37,6 +41,10 @@ public class ThreadPooTest {
         System.out.println("总共耗时："+(time2-time1));
 
     }
+
+    /**
+     * 使用ThreadPoolExecutor的方式产生线程池
+     */
     @Test
     public void ThreadPoolExecutorTest(){
        ExecutorService executorService=new ThreadPoolExecutor(10, 20,  500, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(512) , new ThreadPoolExecutor.CallerRunsPolicy());
