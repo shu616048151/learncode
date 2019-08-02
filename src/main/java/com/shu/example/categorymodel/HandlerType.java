@@ -1,4 +1,4 @@
-package com.shu.example.categoryModel;
+package com.shu.example.categorymodel;
 
 import java.lang.annotation.*;
 

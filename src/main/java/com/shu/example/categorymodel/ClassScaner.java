@@ -1,6 +1,5 @@
-package com.shu.example.categoryModel;
+package com.shu.example.categorymodel;
 
-import javafx.scene.effect.SepiaTone;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.context.ResourceLoaderAware;
@@ -15,7 +14,6 @@ import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.util.ClassUtils;
-import org.springframework.util.ResourceUtils;
 import org.springframework.util.SystemPropertyUtils;
 
 import java.io.IOException;

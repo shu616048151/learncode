@@ -1,4 +1,4 @@
-package com.shu.example.categoryModel;
+package com.shu.example.categorymodel;
 
 import java.math.BigDecimal;
 
@@ -11,6 +11,15 @@ import java.math.BigDecimal;
 public class OrderDTO {
     private String code;
     private BigDecimal price;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public String getCode() {
         return code;
