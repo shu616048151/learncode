@@ -16,7 +16,7 @@ import java.util.Map;
  */
 @Component
 public class HandlerProcessor implements BeanFactoryPostProcessor {
-    private static final String HANDLER_PACKER="";
+    private static final String HANDLER_PACKER="com.shu.example.categorymodel";
 
     /**
      * 扫描hanglerMap注解兵注入容器中
@@ -25,7 +25,7 @@ public class HandlerProcessor implements BeanFactoryPostProcessor {
      */
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        Map<String,Class> handlerMap=new HashMap<>();
+        Map<String,Class> handlerMap=new HashMap<>(3);
         ClassScaner.scan(HANDLER_PACKER,HandlerType.class).forEach(clazz->{
             String type = clazz.getAnnotation(HandlerType.class).value();
             handlerMap.put(type,clazz);

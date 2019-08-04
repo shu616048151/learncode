@@ -22,7 +22,12 @@ public class BeanTool implements ApplicationContextAware {
             applicationContext=context;
         }
     }
-    //通过bean的缩写的方式获取类型
+
+    /**通过bean的缩写的方式获取类型
+     *
+     * @param name
+     * @return
+     */
     public static Object getBean(String name){
         return applicationContext.getBean(name);
     }

@@ -55,7 +55,7 @@ public class ClassScaner implements ResourceLoaderAware {
     private Set<Class<?>> doScan(String basePackage) {
         Set<Class<?>> classes=new HashSet<>();
         try {
-            String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(SystemPropertyUtils.resolvePlaceholders(basePackage) + "/**/*.class");
+            String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + ClassUtils.convertClassNameToResourcePath(SystemPropertyUtils.resolvePlaceholders(basePackage)) + "/**/*.class";
             Resource[] resources = this.resourcePatternResolver.getResources(packageSearchPath);
             for (Resource resource : resources) {
                 if (resource.isReadable()){
