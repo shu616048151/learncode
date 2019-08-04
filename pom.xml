@@ -8,11 +8,20 @@
     <artifactId>spring</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+        <relativePath/>
+    </parent>
+
     <properties>
         <!--使用utf-8编码-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--web-->
         <spring.version>4.3.14.RELEASE</spring.version>
+        <!--<spring.version>5.0.8.RELEASE</spring.version>-->
         <!--数据库相关-->
         <mysql.version>6.0.6</mysql.version>
     </properties>
@@ -26,9 +35,33 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
         </dependencies>
+
     </dependencyManagement>
     <dependencies>
+
+        <!-- 上边引入 parent，因此 下边无需指定版本 -->
+        <!-- 包含 mvc,aop 等jar资源 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!--spring模板引擎-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -126,11 +159,11 @@
         </dependency>
 
         <!--spring-json依赖-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.9</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-databind</artifactId>-->
+            <!--<version>2.9.9</version>-->
+        <!--</dependency>-->
         <!--<dependency>-->
         <!--<groupId>com.fasterxml.jackson.dataformat</groupId>-->
         <!--<artifactId>jackson-dataformat-xml</artifactId>-->
@@ -211,16 +244,16 @@
             <artifactId>hibernate-core</artifactId>
             <version>4.3.8.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.8.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-            <version>4.3.8.Final</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-entitymanager</artifactId>-->
+            <!--<version>4.3.8.Final</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-ehcache</artifactId>-->
+            <!--<version>4.3.8.Final</version>-->
+        <!--</dependency>-->
         <!--swagger的api插件-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -242,11 +275,7 @@
 
     </dependencies>
 
-
-
     <build>
-
-
     <!--配置Maven 对resource文件 过滤 -->
     <resources>
         <resource>
