@@ -1,4 +1,4 @@
-package com.shu.example.categorymodel;
+package com.shu.example.strategymodel;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

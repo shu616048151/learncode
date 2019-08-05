@@ -1,4 +1,4 @@
-package com.shu.example.categorymodel;
+package com.shu.example.strategymodel;
 
 /**
  * @author shuxibing

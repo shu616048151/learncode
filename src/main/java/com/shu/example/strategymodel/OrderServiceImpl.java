@@ -1,4 +1,4 @@
-package com.shu.example.categorymodel;
+package com.shu.example.strategymodel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

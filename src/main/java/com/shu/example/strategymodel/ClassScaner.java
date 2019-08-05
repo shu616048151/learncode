@@ -1,4 +1,4 @@
-package com.shu.example.categorymodel;
+package com.shu.example.strategymodel;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.BeanDefinitionStoreException;

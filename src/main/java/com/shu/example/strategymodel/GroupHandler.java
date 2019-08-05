@@ -1,18 +1,18 @@
-package com.shu.example.categorymodel;
+package com.shu.example.strategymodel;
 
 import org.springframework.stereotype.Component;
 
 /**
  * @author shuxibing
- * @date 2019/7/31 15:01
+ * @date 2019/7/31 14:59
  * @uint d9lab
  * @Description:
  */
 @Component
-@HandlerType("3")
-public class PromotionHandler extends AbstractHandler {
+@HandlerType("2")
+public class GroupHandler extends AbstractHandler {
     @Override
     public String handler(OrderDTO orderDTO) {
-        return "处理团购订单";
+        return "处理团购的类型";
     }
 }

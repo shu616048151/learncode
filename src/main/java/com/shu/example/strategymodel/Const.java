@@ -1,4 +1,4 @@
-package com.shu.example.categorymodel;
+package com.shu.example.strategymodel;
 
 /**
  * @author shuxibing
@@ -7,5 +7,5 @@ package com.shu.example.categorymodel;
  * @Description: 通用的参数类
  */
 public class Const {
-    public static final String HANDLER_PACAGER="com.shu.example.categorymodel";
+    public static final String HANDLER_PACAGER="com.shu.example.strategymodel";
 }
