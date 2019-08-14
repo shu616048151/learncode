@@ -1,6 +1,4 @@
-package com.shu.proxy;
-
-import org.springframework.cglib.proxy.Enhancer;
+package com.shu.designpattern.proxy;
 
 import java.lang.reflect.Proxy;
 

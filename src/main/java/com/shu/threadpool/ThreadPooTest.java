@@ -2,6 +2,8 @@ package com.shu.threadpool;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.*;
@@ -63,6 +65,25 @@ public class ThreadPooTest {
                 e.printStackTrace();
             }
         }
+    }
 
+    @Test
+    public void ScheduledThreadExecutorTest(){
+        System.out.println("执行的时间小于设定的周期");
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
+
+        service.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                    Thread.sleep(500);
+                    System.out.println("执行业务");
+                    System.out.println(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 3000, 2000, TimeUnit.MILLISECONDS);
     }
 }

@@ -1,4 +1,4 @@
-package com.shu.proxy;
+package com.shu.designpattern.proxy;
 
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;

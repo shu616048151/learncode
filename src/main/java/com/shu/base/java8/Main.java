@@ -20,4 +20,8 @@ public class Main {
     public void LambdaTest(){
         Arrays.asList( "a", "b", "d" ).forEach(e -> System.out.println( e ) );
     }
+    @Test
+    public void methodTest(){
+       
+    }
 }

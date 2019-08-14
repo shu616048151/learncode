@@ -1,5 +1,8 @@
 package com.shu.designpattern.singleton;
 
+/**
+ * 懒汉方式
+ */
 public class lanhan {
     private static lanhan lanhan;
     private lanhan(){}

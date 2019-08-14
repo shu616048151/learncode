@@ -3,6 +3,8 @@ package com.shu.example.strategymodel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 /**
  * @author shuxibing
  * @date 2019/7/31 14:38
@@ -29,7 +31,7 @@ public class OrderServiceImpl implements OrderService {
      * @param orderDTO
      * @return
      */
-    public String ordinaryHandle(OrderDTO orderDTO){
+    public String traditionalHandle(OrderDTO orderDTO){
         String type = orderDTO.getType();
         if ("1".equals(type)){
             return "处理普通的类型";

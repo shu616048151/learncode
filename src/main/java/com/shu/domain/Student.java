@@ -1,5 +1,8 @@
 package com.shu.domain;
 
+/**
+ * @author shuxibing
+ */
 public class Student {
     private int sid;
     private String name;

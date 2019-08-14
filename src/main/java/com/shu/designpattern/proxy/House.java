@@ -1,4 +1,4 @@
-package com.shu.proxy;
+package com.shu.designpattern.proxy;
 
 public interface House {
     void buyHouse();

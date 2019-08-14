@@ -3,20 +3,14 @@ package com.shu.mybatis;
 
 import com.shu.domain.User;
 import com.shu.mapper.UserMapper;
-import com.shu.proxy.House;
-import org.apache.ibatis.io.Resources;
+import com.shu.designpattern.proxy.House;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.Resource;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
 
 public class MyBatisMain {
     private  SqlSession sqlSession;

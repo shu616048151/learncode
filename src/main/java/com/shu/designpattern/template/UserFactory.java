@@ -1,4 +1,4 @@
-package com.shu.designpattern.templatepattern;
+package com.shu.designpattern.template;
 
 public class UserFactory extends Factrory {
     public void show() {

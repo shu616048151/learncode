@@ -1,6 +1,4 @@
-package com.shu.proxy;
-
-import org.springframework.stereotype.Component;
+package com.shu.designpattern.proxy;
 
 public class XiaoMing implements House {
     public void buyHouse() {

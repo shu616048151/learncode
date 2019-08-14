@@ -17,6 +17,13 @@ public class User {
     @Column
     private String address;
 
+    public User() {
+    }
+
+    public User(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }
