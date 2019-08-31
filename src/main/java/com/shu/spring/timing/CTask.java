@@ -1,5 +1,6 @@
 package com.shu.spring.timing;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,10 +18,11 @@ import java.util.Date;
 public class CTask implements Task {
     @Scheduled(cron="0/20 * *  * * ? ")
     @Override
+    @Async
     public void task() throws InterruptedException {
         Thread.sleep(5000);
         DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(dateFormat.format(new Date())+"********C任务开始执行");
+        System.out.println(Thread.currentThread().getName()+dateFormat.format(new Date())+"********C任务开始执行");
 
     }
 }

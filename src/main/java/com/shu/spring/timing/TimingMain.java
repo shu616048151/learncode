@@ -1,7 +1,12 @@
 package com.shu.spring.timing;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author shuxibing
@@ -9,8 +14,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @uint d9lab
  * @Description:
  */
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@EnableAsync
+@EnableScheduling
 public class TimingMain {
     public static void main(String[] args){
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:applicationContext-threadpool.xml");
+        SpringApplication.run(TimingMain.class,args);
     }
 }
