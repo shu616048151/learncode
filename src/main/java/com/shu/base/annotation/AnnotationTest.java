@@ -17,6 +17,7 @@ import java.util.Map;
  * @date 2019/5/17 0017 16:26
  * @uint d9lab
  * @Description: 自定义注解解析
+ *  一般使用的方式可以使自定义注解+AOP或者自定义读取某个数据和数据配置等问题
  */
 
 public class AnnotationTest {
