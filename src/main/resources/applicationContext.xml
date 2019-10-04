@@ -13,26 +13,15 @@
         http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:annotation-config></context:annotation-config>
+    <context:annotation-config/>
     <aop:aspectj-autoproxy/>
 
-    <context:component-scan base-package="com.shu"></context:component-scan>
+    <!--<context:component-scan base-package="com.shu.mapper"/>-->
 
     <tx:annotation-driven/>
 
-    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
     <!-- 加载配置文件 -->
-    <!--<context:property-placeholder location="classpath:db.properties" />-->
-    <!-- 数据库连接池 -->
-   <!-- <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="${jdbc.driver}" />
-        <property name="url" value="${jdbc.url}" />
-        <property name="username" value="${jdbc.username}" />
-        <property name="password" value="${jdbc.password}" />
-        <property name="maxActive" value="10" />
-        <property name="maxIdle" value="5" />
-    </bean>-->
+    <context:property-placeholder location="classpath:db.properties" />
     <!--阿里巴巴的连接池-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close">
@@ -62,7 +51,7 @@
         如果要扫描多个包，中间使用半角逗号分隔
         要求mapper.xml和mapper.java同名且在同一个目录
          -->
-        <property name="basePackage" value="com.shu"/>
+        <property name="basePackage" value="com.shu.mapper"/>
         <!-- 使用sqlSessionFactoryBeanName -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
