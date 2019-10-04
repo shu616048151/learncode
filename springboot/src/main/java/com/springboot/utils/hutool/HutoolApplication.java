@@ -39,6 +39,8 @@ public class HutoolApplication {
         OutputStream outputStream = response.getOutputStream();
         CircleCaptcha circleCaptcha = CaptchaUtil.createCircleCaptcha(300, 100,4,4);
         outputStream.write(circleCaptcha.getImageBytes());
+        outputStream.flush();
+        outputStream.close();
     }
 
     /**
@@ -46,10 +48,10 @@ public class HutoolApplication {
      * @param response
      * @throws IOException
      */
-    @RequestMapping("/qrCode")
+    @RequestMapping("/getQrCode")
     public void getQrCode(HttpServletResponse response) throws IOException {
         OutputStream outputStream = response.getOutputStream();
-        QrConfig config = new QrConfig(300, 300);
+        QrConfig config = new QrConfig(200, 200);
         // 高纠错级别
         config.setErrorCorrection(ErrorCorrectionLevel.H);
         // 设置边距，既二维码和背景之间的边距
@@ -60,8 +62,12 @@ public class HutoolApplication {
         config.setBackColor(Color.BLACK.getRGB());
         try {
             QrCodeUtil.generate("舒细兵，武汉理工大学",config,"jpg",outputStream);
+
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            outputStream.flush();
+            outputStream.close();
         }
 
     }
