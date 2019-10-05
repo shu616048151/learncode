@@ -8,6 +8,10 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * @author shuxibing
  * @date 2019/9/29 21:37
@@ -18,7 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @PropertySource(value = "classpath:hello.properties")
 @RestController
 public class HelloApp {
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
+//        Properties properties=new Properties();
+//        InputStream inputStream=HelloApp.class.getClassLoader().getResourceAsStream("application-hello.properties");
+//        properties.load(inputStream);
+//        SpringApplication springApplication=new SpringApplication(HelloApp.class);
+//        springApplication.setDefaultProperties(properties);
+//        springApplication.run(args);
         SpringApplication.run(HelloApp.class,args);
     }
 
@@ -27,6 +37,11 @@ public class HelloApp {
     @RequestMapping("/getProperty")
     public HelloProperty getProperty(){
         return helloProperty;
+    }
+
+    @RequestMapping("/shu")
+    public String shu(){
+        return "shu";
     }
 
 

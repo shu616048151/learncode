@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
@@ -55,7 +56,7 @@ public class HutoolApplication {
         // 高纠错级别
         config.setErrorCorrection(ErrorCorrectionLevel.H);
         // 设置边距，既二维码和背景之间的边距
-        config.setMargin(3);
+        config.setMargin(0);
         // 设置前景色，既二维码颜色
         config.setForeColor(Color.WHITE.getRGB());
         // 设置背景色
@@ -69,6 +70,6 @@ public class HutoolApplication {
             outputStream.flush();
             outputStream.close();
         }
-
     }
+
 }
