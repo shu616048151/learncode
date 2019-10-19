@@ -5,6 +5,11 @@ package com.shu.base.thread;
  * @date 2019/9/27 20:53
  * @uint d9lab
  * @Description: 造成死锁的例子
+ *
+ * 死锁条件：互斥条件：进程要求对所分配的资源进行排它性控制，即在一段时间内某资源仅为一进程所占用。
+         * 请求和保持条件：当进程因请求资源而阻塞时，对已获得的资源保持不放。
+         * 不剥夺条件：进程已获得的资源在未使用完之前，不能剥夺，只能在使用完时由自己释放。
+         * 环路等待条件：在发生死锁时，必然存在一个进程--资源的环形链。
  */
 public class DeadLock implements Runnable{
     //静态变量是共有的对象
@@ -32,6 +37,7 @@ public class DeadLock implements Runnable{
         if (flag==1){
             synchronized (o1){
                 try {
+                    System.out.println("执行A操作");
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -44,6 +50,7 @@ public class DeadLock implements Runnable{
         if (flag == 0){
             synchronized (o2){
                 try {
+                    System.out.println("执行B操作");
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -55,7 +62,6 @@ public class DeadLock implements Runnable{
             }
         }
     }
-
     public void setFlag(int flag) {
         this.flag = flag;
     }

@@ -11,5 +11,10 @@ public class Main {
         for (SignType signType:SignType.values()){
             System.out.println(signType.getType());
         }
+        SignType md5 = SignType.MD5;
+        System.out.println(md5);
+        System.out.println(md5.getType());
+        String type = SignType.HMACSHA256.getType();
+        System.out.println(type);
     }
 }

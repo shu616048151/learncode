@@ -11,9 +11,8 @@ import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 public class Sort {
     public static void main(String[] args){
         int[] array={9,1,3,2,5,6,4,8};
-       // int[] ints = bubbleSort(array);
-        int[] ints = quickSort(array,0,array.length-1);
-
+        int[] ints = selectSort(array);
+        //int[] ints = quickSort(array,0,array.length-1);
         //打印数组
         for (int i=0;i<ints.length;i++){
             System.out.println(ints[i]);
@@ -60,7 +59,8 @@ public class Sort {
     }
 
     /**
-     * 插入排序：前面为有序区，后面是无序区，将后面的无序区的第一个数，进行与有序区的最后一个数进行比较，如果该数小于最后的一个数，将最后的一个数进行向后移一位，浮动前进，直到找到合适的位置，将数据进行插入。
+     * 插入排序：前面为有序区，后面是无序区，将后面的无序区的第一个数，进行与有序区的最后一个数进行比较，
+     * 如果该数小于最后的一个数，将最后的一个数进行向后移一位，浮动前进，直到找到合适的位置，将数据进行插入。
      * @param shu
      * @return
      */
@@ -124,7 +124,8 @@ public class Sort {
     public static void heapSort(int[] arr){
         //1.构建大顶堆
         for(int i=arr.length/2-1;i>=0;i--){
-            //从第一个非叶子结点从下至上，从右至左调整结构
+            //从第一个非叶子结点从下至上，
+
             adjustHeap(arr,i,arr.length);
         }
         //2.调整堆结构+交换堆顶元素与末尾元素

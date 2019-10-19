@@ -1,6 +1,7 @@
 package com.shu.alogrithm;
 
 import org.junit.Test;
+import org.springframework.boot.env.YamlPropertySourceLoader;
 import sun.net.NetHooks;
 
 import java.awt.image.Kernel;
@@ -87,7 +88,7 @@ public class Solution1 {
         System.out.println(0);
     }
 
-    @Test
+
     public int NumberOf1Between1AndN_Solution(int n) {
         int num = 0;
         for (int i = 0; i <= n; i++) {
@@ -101,7 +102,6 @@ public class Solution1 {
         return num;
     }
 
-    @Test
     public String PrintMinNumber(int[] numbers) {
         if (numbers == null || numbers.length == 0) {
         return "";
@@ -126,7 +126,6 @@ public class Solution1 {
         return sb.toString();
     }
 
-    @Test
     public void FindNumsAppearOnce(int[] array, int num1[], int num2[]) {
         Set<Integer> set=new HashSet<>();
         for (int i=0;i<array.length;i++){
@@ -208,7 +207,69 @@ public class Solution1 {
 
     @Test
     public void currentHashMap(){
-        Map<String,String> map=new ConcurrentHashMap<>(0);
+        Map<String,String> map=new ConcurrentHashMap<>();
+    }
+
+
+    @Test
+    public void test1(){
+        int[][] array={{0,1,1},{0,0,1},{0,0,1}};
+        int max=0;
+        int red=0;
+        int black=0;
+        for (int i=0;i<array.length;i++){
+            for (int j=0;j<array[i].length;j++){
+                int temp=array[j][i];
+                if (temp==0){
+                    red++;
+                }
+                if (temp==1){
+                    black++;
+                }
+            }
+            int tempMax = Math.max(red, black);
+            red=0;
+            black=0;
+            if (tempMax>max){
+                max=tempMax;
+            }
+        }
+        System.out.println(max);
+    }
+
+    @Test
+    public void test3(){
+        int[] array={-2,4,-3,4,-6,-5};
+        int max=array[0];
+        int temp=0;
+        for (int i=0;i<array.length;i++){
+            temp+=array[i];
+            if (temp>max){
+                max=temp;
+            }
+            if (temp<0){
+                temp=0;
+            }
+        }
+        System.out.println(max);
+    }
+
+    @Test
+    public void test4() throws InterruptedException {
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.print("1");
+            }
+        });
+        thread.start();
+        thread.join();
+        System.out.print("2");
     }
 
 

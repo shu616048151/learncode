@@ -44,6 +44,7 @@ public class RedirectUtil {
         return getHost(hostPrefix, "");
     }
 
+    //路由ip地址转换
     public static String getHost(String hostPrefix, String url) {
         hostPrefix = hostPrefixMap.get(hostPrefix);//例如: trade
         String host = SERVER_HOST;

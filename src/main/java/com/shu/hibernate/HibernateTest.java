@@ -63,7 +63,8 @@ public class HibernateTest{
     @Test
     public void getFirstOne(){
         final String hql="from User where id=3";
-     User user= hibernateTemplate.executeWithNativeSession(new HibernateCallback<User>() {
+        User user= hibernateTemplate.executeWithNativeSession(new HibernateCallback<User>() {
+         @Override
          public User doInHibernate(Session session) throws HibernateException {
              Query query =session.createQuery(hql);
              return (User) query.setMaxResults(1).uniqueResult();

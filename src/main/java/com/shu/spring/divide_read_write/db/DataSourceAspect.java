@@ -16,7 +16,6 @@ public class DataSourceAspect implements MethodBeforeAdvice, AfterReturningAdvic
     public void afterReturning(Object returnValue, Method method, Object[] args, Object target) throws Throwable {
 
     }
-
     //设置事务环绕处理
     @Override
     public void before(Method method, Object[] args, Object target) throws Throwable {
@@ -25,6 +24,7 @@ public class DataSourceAspect implements MethodBeforeAdvice, AfterReturningAdvic
             DynamicDataSourceHolder.setSalve();
         }else{
             DynamicDataSourceHolder.setMaster();
+
         }
 
 

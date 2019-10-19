@@ -1,6 +1,7 @@
 package com.shu.mybatis;
 
 
+import cn.hutool.core.convert.Convert;
 import com.shu.domain.User;
 import com.shu.mapper.UserMapper;
 import com.shu.designpattern.proxy.House;
@@ -34,7 +35,7 @@ public class MyBatisMain {
         User user=new User();
         user.setId(2);
         User user1= userMapper.getUserById(2);
-        System.out.println(user1);
+        System.out.println(Convert.toStr(user1));
         sqlSession.close();
     }
 

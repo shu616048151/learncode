@@ -18,6 +18,7 @@ import java.util.Map;
  * Author: zouy
  * Unit: D9lab
  * Date: 2018-07-27 19:53
+ * aop可以做一些权限校验问题
  */
 @Component
 @Aspect

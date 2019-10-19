@@ -3,42 +3,27 @@ package com.shu.swagger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.*;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
  * @author shuxibing
  * @date 2019/9/27 19:31
  * @uint d9lab
- * @Description:
+ * @Description: WebMvcConfigurerAdapter和WebMvcConfigurationSupport 没有多大区别，只是WebMvcConfigurationSupport 为了替换ebMvcConfigurerAdapter的问题
  */
 @EnableWebMvc//必须存在
-
 @Configuration
 public class SwaggerConfig extends WebMvcConfigurerAdapter {
-
-
-    /**
-     * 资源映射
-     * @param registry
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
-        super.addResourceHandlers(registry);
-    }
 
     @Bean
     public Docket createRestApi() {
@@ -57,6 +42,19 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
     }
 
     /**
+     * 资源映射
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        super.addResourceHandlers(registry);
+    }
+
+    /**
      * 跨域支持
      * @param registry
      */
@@ -69,6 +67,21 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
                 .maxAge(3600);
         super.addCorsMappings(registry);
     }
+
+
+
+    //解决返回中文乱码
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+        super.configureMessageConverters(converters);
+        converters.add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
+    }
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.favorPathExtension(false);
+    }
+
 
 
 }

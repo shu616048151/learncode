@@ -15,6 +15,7 @@ public class MyRunnable implements Runnable {
         this.num = num;
     }
 
+    @Override
     public void run() {
             try {
                 System.out.println("myrunnnable的线程代号：" + num);

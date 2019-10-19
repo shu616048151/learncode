@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 
 public class MacthcerMain {
     public static void main(String[] args){
-        Pattern pattern=Pattern.compile("\\d+");
+        String reg="\\d+";
+        Pattern pattern=Pattern.compile(reg);
         Matcher matcher= pattern.matcher("22@asdfd333gdf3");
         String[] split = pattern.split("33&sadfsd999");
         for (String s :split){
@@ -36,10 +37,24 @@ public class MacthcerMain {
     }
     @Test
     public void mail(){
-        Pattern pattern=Pattern.compile("[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}");
+        String regexp = "[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}";
+        Pattern pattern=Pattern.compile(regexp);
         Matcher matcher = pattern.matcher("shu616048151@qq.com,616048151@whut.edu.com");
         while (matcher.find()){
             System.out.println(matcher.group());
+        }
+    }
+
+
+    @Test
+    public void checkOpenId(){
+        String openId="oX8hJ6KKucbmeu62Pi__nAJ4Q6P8";
+        System.out.println(openId.length());
+        String reg="^([0-9A-F]{28})$";
+        Pattern pattern=Pattern.compile(reg);
+        Matcher matcher = pattern.matcher(openId);
+        while (matcher.find()){
+            System.out.println(matcher.group(0));
         }
     }
 }

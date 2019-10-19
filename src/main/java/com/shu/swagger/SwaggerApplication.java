@@ -29,12 +29,19 @@ public class SwaggerApplication {
         SpringApplication.run(SwaggerApplication.class,args);
     }
 
+
+    /**
+     * produces 是返回信息的数据格式和编码方式
+     * @param name
+     * @return
+     */
     @ApiOperation("测试swagger")
     @ApiImplicitParams({
             @ApiImplicitParam(name="name",value = "姓名",paramType ="form",dataType = "string",required = true)
     })
     @RequestMapping(value = "/testswagger",method = RequestMethod.POST)
-    public String testswagger(String name){
+    public String testswagger(String name) {
+        System.out.println(name);
         return "hello,"+name;
     }
 }
