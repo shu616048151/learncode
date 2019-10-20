@@ -10,7 +10,7 @@ package com.shu.base.annotation;
 public class User {
     @EntityField("id")
     private  String id;
-
+    @EntityField("name")
     private String name;
     private int age;
 
