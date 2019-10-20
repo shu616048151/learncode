@@ -5,6 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.shu</groupId>
     <artifactId>learncode</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <!--默认打包方式为jar 一般不用pom-->
 
