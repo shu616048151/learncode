@@ -4,19 +4,16 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-
 /**
  * @author shuxibing
- * @date 2019/9/19 10:03
+ * @date 2019/9/20 12:03
  * @uint d9lab
  * @Description:
  */
+@Document(indexName = "item",type = "item")
 @Data
-@Document(indexName = "myname",type ="user")
-public class User {
+public class Item {
     @Id
-    private String id;
+    private Integer id;
     private String name;
-    private Integer age;
-    private Integer sex;
 }

@@ -2,7 +2,6 @@ package com.shu.elasticsearch.dao;
 
 import com.shu.elasticsearch.model.User;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
-import org.springframework.data.repository.CrudRepository;
 
 /**
  * @author shuxibing
