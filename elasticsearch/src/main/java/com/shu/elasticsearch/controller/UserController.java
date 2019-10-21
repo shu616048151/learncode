@@ -2,8 +2,7 @@ package com.shu.elasticsearch.controller;
 
 import com.shu.elasticsearch.dao.UserDao;
 import com.shu.elasticsearch.model.User;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.query.functionscore.FunctionScoreQueryBuilder;
 import org.elasticsearch.index.query.functionscore.ScoreFunctionBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,4 +64,41 @@ public class UserController {
         }
         return list;
     }
+
+    @RequestMapping("/fuzzySearch")
+    public List<User> fuzzySearch(String keywords){
+        FuzzyQueryBuilder fuzzyQueryBuilder = QueryBuilders.fuzzyQuery("name", keywords);
+        Iterable<User> search = userDao.search(fuzzyQueryBuilder);
+        Iterator<User> iterator = search.iterator();
+        List<User> userList=new ArrayList<>(0);
+        while (iterator.hasNext()){
+            userList.add(iterator.next());
+        }
+        return userList;
+    }
+    @RequestMapping("/match")
+    public List<User> match(String keywords){
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery(keywords, "name", "description");
+        Iterable<User> search = userDao.search(multiMatchQueryBuilder);
+        Iterator<User> iterator = search.iterator();
+        List<User> userList=new ArrayList<>(0);
+        while (iterator.hasNext()){
+            userList.add(iterator.next());
+        }
+        return userList;
+    }
+    @RequestMapping("/term")
+    public List<User> term(String keywords){
+        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", keywords);
+        Iterable<User> search = userDao.search(termQueryBuilder);
+        Iterator<User> iterator = search.iterator();
+        List<User> userList=new ArrayList<>(0);
+        while (iterator.hasNext()){
+            userList.add(iterator.next());
+        }
+        return userList;
+    }
+
+
+
 }

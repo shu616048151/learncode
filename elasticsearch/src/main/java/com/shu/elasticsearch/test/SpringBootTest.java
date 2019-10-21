@@ -97,7 +97,7 @@ public class SpringBootTest {
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
         // 在queryBuilder对象中自定义查询
         //matchQuery:底层就是使用的termQuery
-        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("name","zhangsan"));
+        queryBuilder.withQuery(QueryBuilders.fuzzyQuery("name","zhangs"));
         //查询，search 默认就是分页查找
         Page<User> page = this.userDao.search(queryBuilder.build());
         //获取数据
