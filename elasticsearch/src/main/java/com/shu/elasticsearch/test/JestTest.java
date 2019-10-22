@@ -33,14 +33,14 @@ import java.util.List;
  * @author shuxibing
  * @date 2019/9/20 11:55
  * @uint d9lab
- * @Description:
+ * @Description: jest方式
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ElasticSearchApp.class)
 public class JestTest {
     private static String indexName = "shu";
     private static String typeName = "user";
-    private static String elasticIps="http://127.0.0.1:9200";
+    private static String elasticIps="http://192.168.25.128:9300";
 
     @Autowired
     private JestClient jestClient;

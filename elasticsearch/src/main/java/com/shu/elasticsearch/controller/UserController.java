@@ -87,6 +87,17 @@ public class UserController {
         }
         return userList;
     }
+    @RequestMapping("/matchall")
+    public List<User> matchall(String keywords){
+        MatchAllQueryBuilder matchAllQueryBuilder = QueryBuilders.matchAllQuery();
+        Iterable<User> search = userDao.search(matchAllQueryBuilder);
+        Iterator<User> iterator = search.iterator();
+        List<User> userList=new ArrayList<>(0);
+        while (iterator.hasNext()){
+            userList.add(iterator.next());
+        }
+        return userList;
+    }
     @RequestMapping("/term")
     public List<User> term(String keywords){
         TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("name", keywords);
