@@ -1,4 +1,4 @@
-package com.shu.base.nio.netty;
+package com.shu.base.nio;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
