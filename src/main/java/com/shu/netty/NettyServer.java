@@ -1,4 +1,4 @@
-package com.shu.base.nio.netty;
+package com.shu.netty;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandlerContext;
