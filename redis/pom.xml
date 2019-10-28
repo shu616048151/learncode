@@ -19,11 +19,6 @@
     <properties>
         <!--使用utf-8编码-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!--web-->
-        <spring.version>4.3.14.RELEASE</spring.version>
-        <!--<spring.version>5.0.8.RELEASE</spring.version>-->
-        <!--数据库相关-->
-        <mysql.version>6.0.6</mysql.version>
     </properties>
 
     <dependencyManagement>
@@ -45,10 +40,12 @@
             <!--<scope>test</scope>-->
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
-        <!--</dependency>-->
+
+        <!--redis相关-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>commons-lang</groupId>
@@ -57,12 +54,6 @@
         </dependency>
 
 
-        <!--redis相关-->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>2.7.2</version>
-        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -74,6 +65,14 @@
             <artifactId>commons-pool2</artifactId>
             <version>2.6.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.4</version>
+            <scope>compile</scope>
+        </dependency>
+
 
     </dependencies>
 

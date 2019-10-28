@@ -1,13 +1,17 @@
 package com.shu.redis.miaosha.controller;
 
+import com.shu.redis.antibrush.aspect.RequestLimit;
 import com.shu.redis.miaosha.util.ActivityDynamicTask;
 import com.shu.redis.miaosha.util.MyJedisPool;
 import com.shu.redis.miaosha.util.PessLockThread;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
@@ -22,8 +26,10 @@ import java.util.concurrent.Executors;
 @RestController
 public class RedisController {
 
+    private final static Logger logger = Logger.getLogger(RedisController.class);
+
    final String key="wecash";
-    @Autowired
+    @Resource
     private ActivityDynamicTask activityDynamicTask;
 
 
@@ -48,6 +54,15 @@ public class RedisController {
     public void startTask(){
         activityDynamicTask.startCron();
     }
+
+
+
+    @RequestLimit(maxCount = 10,expireTime = 10)
+    @RequestMapping(value = "/trade/activity/startSecondKill")
+    public String secondSkill(HttpServletRequest request) throws Exception {
+       return "成功";
+    }
+
 
 
     /**
