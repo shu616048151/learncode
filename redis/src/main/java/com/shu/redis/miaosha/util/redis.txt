@@ -1,0 +1,4 @@
+redis实现秒杀的几种方法：
+1 乐观锁 基于redis事务的方法 mutli  下单去库存的速度最快，但不利于后续处理订单未支付问题
+2 悲观锁 基于redis的setNx和getAndSet方法实现方式 可以实现加减去库存，且数据安全
+3 redis自身的原子操作方法 如incr、incrby、decr、decrby 在单机下，redis的原子性操作都能实现加减库存。

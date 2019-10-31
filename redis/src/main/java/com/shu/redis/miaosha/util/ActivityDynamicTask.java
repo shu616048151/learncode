@@ -72,24 +72,34 @@ public class ActivityDynamicTask {
                   Long  oldTime = Long.valueOf(jedis.get(key));
                   long newTime = System.currentTimeMillis();
                   if (newTime-oldTime>3*1000){
-                      long end=System.currentTimeMillis()+timeout;
-                      boolean lock=lock(key, String.valueOf(end));
-                      if (lock){
+//                      long end=System.currentTimeMillis()+timeout;
+//                      boolean lock=lock(key, String.valueOf(end));
+//                      if (lock){
+//                          String oldlNum= jedis.get("wecash");
+//                          logger.info("更新前商品余数:"+oldlNum);
+//                          jedis.incr("wecash");
+//                          String newNum = jedis.get("wecash");
+//                          System.out.println("更新后商品余数:"+newNum);
+//                          unlock(key, String.valueOf(end));
+//                          jedis.del(key);
+//                          jedis.close();
+//                      }
+
+
+                        //redis的原子性进行操作
                           String oldlNum= jedis.get("wecash");
                           logger.info("更新前商品余数:"+oldlNum);
                           jedis.incr("wecash");
                           String newNum = jedis.get("wecash");
                           System.out.println("更新后商品余数:"+newNum);
-                          unlock(key, String.valueOf(end));
                           jedis.del(key);
                           jedis.close();
-                      }
                   }
               }
           }catch (Exception e){
               jedis.close();
               //重新连接
-              jedis=MyJedisPool.getJedis();
+              e.printStackTrace();
 
           }
 

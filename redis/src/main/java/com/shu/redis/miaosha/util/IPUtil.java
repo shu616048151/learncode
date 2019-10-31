@@ -3,11 +3,11 @@ package com.shu.redis.miaosha.util;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Author: zouy
- * Unit: D9lab
- * Date: 2018-07-28 11:20
+ * @author shuxibing
+ * @date 2019/10/25 17:29
+ * @uint d9lab
+ * @Description:
  */
-
 public class IPUtil {
     public static String getIpAddress(HttpServletRequest request) throws Exception {
         String ip = request.getHeader("x-forwarded-for");

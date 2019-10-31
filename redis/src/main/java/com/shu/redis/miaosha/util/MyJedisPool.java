@@ -20,14 +20,17 @@ public class MyJedisPool {
 		        // 设置最大等待时间
 		        config.setMaxWaitMillis(3000);
 		        // 在borrow一个jedis实例时，是否需要验证，若为true，则所有jedis实例均是可用的
-		        config.setTestOnBorrow(false);
+		        config.setTestOnBorrow(true);
 
-		        config.setTestOnReturn(false);
+//		        config.setTestOnReturn(false);
+//
+//		        config.setBlockWhenExhausted(true);
 
-		        config.setBlockWhenExhausted(true);
-
-				jedisPool = new JedisPool(config,"kdgg.d9lab.net",6479,3000,"D9Lab171829");
-//				jedisPool = new JedisPool(config,"127.0.0.1",6379,3000);
+		        //本机
+				jedisPool = new JedisPool(config,"127.0.0.1",6379,3000);
+//				jedisPool = new JedisPool(config,"kdgg.d9lab.net",6479,3000,"D9Lab171829");
+				//阿里云
+//				jedisPool = new JedisPool(config,"101.200.59.105",6379,3000,"shuxibing");
 
 			}
 		}
@@ -36,13 +39,4 @@ public class MyJedisPool {
 		return jedisPool.getResource();
 	}
 
-	public static void main(String[] args){
-        Jedis jedis = getJedis();
-//        jedis.set("shu","100");
-        for (int i=0;i<1000;i++){
-            jedis.incr("shu");
-        }
-        System.out.println(jedis.get("shu"));
-        jedis.close();
-    }
 }
