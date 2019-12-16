@@ -25,7 +25,7 @@ import java.util.Scanner;
  *
  * 样例输出：0.3125
  */
-public class TongGuoKaoShi {
+public class PassTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int num = scanner.nextInt();
