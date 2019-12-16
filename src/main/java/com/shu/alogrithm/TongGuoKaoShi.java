@@ -35,7 +35,7 @@ public class TongGuoKaoShi {
             p[t] = scanner.nextDouble() / 100;
             t++;
         }
-        chakan(p,num);
+        System.out.println(pass(p,num));
 
     }
 
@@ -44,7 +44,7 @@ public class TongGuoKaoShi {
      * @param p
      * @param num
      */
-    public static void chakan(double[] p, int num){
+    public static double pass(double[] p, int num){
         double[][] dp = new double[num+1][num+1];
         dp[0][0] = 1;
         //行是通过题的数量，列是题的个数
@@ -64,6 +64,6 @@ public class TongGuoKaoShi {
         for ( ; i <= num; i++){
             pass += dp[num][i];//最后一行，大于要答对题目的概率的总和
         }
-        System.out.println(pass);
+        return pass;
     }
 }
