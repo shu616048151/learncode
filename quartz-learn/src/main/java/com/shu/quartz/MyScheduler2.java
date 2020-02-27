@@ -3,39 +3,42 @@ package com.shu.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Date;
 
 /**
- * @author shuxibing
- * @date 2019/10/27 12:57
- * @uint d9lab
+ * @Author shuxibing
+ * @Date 2020/2/27 20:27
+ * @Uint d9lab-2019
  * @Description:
  */
-public class MyScheduler {
+public class MyScheduler2 {
     public static void main(String[] args) throws SchedulerException, InterruptedException {
         // 1、创建调度器Scheduler
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         Scheduler scheduler = schedulerFactory.getScheduler();
         // 2、创建JobDetail实例，并与PrintWordsJob类绑定(Job执行内容)
         JobDetail jobDetail = JobBuilder.newJob(PrintWordsJob.class)
-                .usingJobData("shujob","shuxibing")
+                .usingJobData("shujob", "这个Job用来测试的")
                 .withIdentity("job1", "group1").build();
         // 3、构建Trigger实例,每隔1s执行一次
-        Trigger trigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "triggerGroup1")
-                .usingJobData("shutrigger","shuzhiyang")
+        Date startDate = new Date();
+        startDate.setTime(startDate.getTime() + 1000);
+
+        Date endDate = new Date();
+        endDate.setTime(startDate.getTime() + 50000);
+
+        CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity("trigger1", "triggerGroup2")
+                .usingJobData("shutrigger", "这是jobDetail1的trigger")
                 .startNow()//立即生效
-                .withSchedule(SimpleScheduleBuilder.simpleSchedule()
-                        .withIntervalInSeconds(1)//每隔1s执行一次
-                        .repeatForever()).build();//一直执行
+                .startAt(startDate)
+                .endAt(endDate)
+                .withSchedule(CronScheduleBuilder.cronSchedule("2/1 * * * * ?  "))
+                .build();
 
         //4、执行
-        scheduler.scheduleJob(jobDetail, trigger);
+        scheduler.scheduleJob(jobDetail, cronTrigger);
         System.out.println("--------scheduler start ! ------------");
         scheduler.start();
-
-        //睡眠
-        TimeUnit.SECONDS.sleep(30);
-        scheduler.shutdown();
         System.out.println("--------scheduler shutdown ! ------------");
 
     }

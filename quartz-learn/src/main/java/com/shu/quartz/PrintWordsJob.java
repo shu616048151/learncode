@@ -23,6 +23,5 @@ public class PrintWordsJob implements Job {
 
         String printTime = new SimpleDateFormat("yy-MM-dd HH-mm-ss").format(new Date());
         System.out.println("PrintWordsJob start at:" + printTime + ", prints: Hello Job-" + new Random().nextInt(100));
-
     }
 }
