@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class AnnotationTest {
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        String path="com.shu.base.annotation.User";
+        String path="com.shu.base.com.shu.springframework.annotation.User";
         Class<?> clazz=Class.forName(path);
         Object o = clazz.newInstance();
         EntityClass declaredAnnotation = clazz.getDeclaredAnnotation(EntityClass.class);

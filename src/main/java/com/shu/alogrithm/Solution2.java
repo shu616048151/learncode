@@ -1,6 +1,9 @@
 package com.shu.alogrithm;
 
 
+import org.hibernate.validator.internal.util.privilegedactions.NewSchema;
+import org.junit.Test;
+
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.regex.Matcher;
@@ -15,12 +18,52 @@ import java.util.regex.Pattern;
 public class Solution2 {
 
     public static void main(String[] args){
-      Solution2 solution2=new Solution2();
-//        int number_solution = solution2.GetUglyNumber_Solution(1);
-//        System.out.println(number_solution);
+//        Scanner scanner=new Scanner(System.in);
+//        Set<Integer> set=new TreeSet<>();
+//        Integer s =Integer.valueOf(scanner.nextLine());
+//        System.out.println("行数："+s);
+//        set = readData(s, scanner, set);
+//        Integer s1 =Integer.valueOf(scanner.nextLine());
+//        set = readData(s1, scanner, set);
+//        for (Integer integer : set) {
+//            System.out.println(integer);
+//        }
+        Solution2 solution2= new Solution2();
+        String result = solution2.getResult(180);
+        System.out.println(result);
 
-        char[] c={'3','e'};
-        System.out.println(solution2.isNumeric(c));
+    }
+
+    public static Set readData(int row,Scanner scanner,Set set){
+        for (int i=0;i<row;i++) {
+            Integer data = Integer.valueOf(scanner.nextLine());
+            if (!set.contains(data)) {
+                set.add(data);
+            }
+        }
+        return set;
+    }
+
+    /**
+     * 功能:输入一个正整数，按照从小到大的顺序输出它的所有质因子（如180的质因子为2 2 3 3 5 ）
+     *
+     * 最后一个数后面也要有空格
+     * @param ulDataInput
+     * @return
+     */
+    public String getResult(long ulDataInput){
+        int index=2;
+        StringBuilder stringBuilder=new StringBuilder();
+        while (index<=ulDataInput){
+            if (ulDataInput%index==0){
+                ulDataInput=ulDataInput/index;
+                stringBuilder.append(index).append(" ");
+            }else {
+                index++;
+            }
+        }
+        return stringBuilder.toString();
+
     }
 
     public static class TreeNode {
@@ -49,6 +92,7 @@ public class Solution2 {
                 deque.add(t.left);
             }
             if(t.right != null){
+
                 deque.add(t.right);
             }
         }
@@ -213,5 +257,20 @@ public class Solution2 {
         }while((i = i/10) > 0);
         return sum;
     }
+
+
+    public Set deleteAndSort(int[] array){
+        Set<Integer> set=new TreeSet<>();
+       for (int i=0; i<array.length;i++){
+           int num=array[i];
+           if (!set.contains(num)){
+               set.add(num);
+           }
+       }
+       return set;
+
+    }
+
+
 
 }

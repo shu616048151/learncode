@@ -11,8 +11,8 @@ package com.shu.elasticsearch.config;//package com.shu.elasticsearch.config;
 //import org.springframework.boot.autoconfigure.elasticsearch.jest.JestProperties;
 //import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 //import org.springframework.boot.context.properties.EnableConfigurationProperties;
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
+//import org.springframework.context.com.shu.springframework.annotation.Bean;
+//import org.springframework.context.com.shu.springframework.annotation.Configuration;
 //import  java.util.List;
 //
 ///**

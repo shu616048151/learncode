@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 
 /**
- * edu.whut.change.common.controller
+ * edu.whut.change.common.com.shu.springframework.controller
  * 这是一个后端进行多项目跳转的类
  */
 @ApiIgnore

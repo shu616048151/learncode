@@ -14,6 +14,15 @@ import java.io.File;
  */
 public class FileTest {
     public static void main(String[] args){
+        String path=" https://face.ceks100.com/group1/M0B/00/00/rBggYV3GnAiALuB3AEq-uhr1Mm0906.jpg";
+//        String linuxPath="/alfa/whut/data11/fastdfs/data/00/00/rBggYV3GnAiALuB3AEq-uhr1Mm0906.jpg";
+        String linuxPath="c:\\Users\\Administrator\\Desktop\\bos.sql";
+        File file=new File(linuxPath);
+        if (file.exists() && file.isFile()){
+            System.out.println(file.length());
+        }
+
+
 
     }
 
@@ -22,7 +31,7 @@ public class FileTest {
         File file=new File("C:\\Users\\Administrator\\Desktop\\3.jpg");
         String upload = FileUtil.upload("1", file);
         ImageDao imageDao=new ImageDao();
-        imageDao.insert(upload);
+        //imageDao.insert(upload);
         System.out.println(upload);
     }
     @Test

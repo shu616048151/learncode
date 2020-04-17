@@ -12,8 +12,6 @@ public class DynamicProgramming {
         int length = LongestSubString(arr);
         System.out.println(length);
     }
-
-
     /**
      * 【题目】：
      *

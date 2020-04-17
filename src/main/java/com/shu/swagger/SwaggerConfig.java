@@ -36,7 +36,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
         return new ApiInfoBuilder()
                 .title("com.shu")
                 .description("产品子系统(交易,评价等)接口文档")
-                .termsOfServiceUrl("http://localhost:8080/shu/v2/api-docs")
+                .termsOfServiceUrl("http://localhost:8082/shu/v2/api-docs")
                 .version("1.0.0")
                 .build();
     }

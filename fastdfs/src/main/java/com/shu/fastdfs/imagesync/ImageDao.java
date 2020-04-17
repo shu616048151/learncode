@@ -1,8 +1,10 @@
 package com.shu.fastdfs.imagesync;
 
+import org.assertj.core.util.VisibleForTesting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.*;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutorService;
@@ -20,12 +22,17 @@ public class ImageDao {
     private Connection conn;
     private Statement st;
     public ImageDao() throws Exception{
-        this.conn = Util.conn();
+        String username="root";
+        String password="027D9Lab114215172223";
+        String url="jdbc:mysql://115.29.161.187:3306/change";
+        String driver="com.mysql.jdbc.Driver";
+        //数据库连接
+        //第一步：加载驱动
+        Class.forName(driver);
+        //第二步：建立数据库连接
+        Connection conn=DriverManager.getConnection(url,username,password);
+        this.conn = conn;
         st= this.conn.createStatement();
-    }
-    //将电影信息存入数据库
-    public void insert(String title,String year,String country,String lan,String douban_link,Double douban_score,String introduce,String main_actor,String download_url,String img_url ) throws Exception{
-
     }
 
     /**
@@ -51,33 +58,62 @@ public class ImageDao {
 
 
 
-    public void search() throws SQLException {
-        String sql="SELECT DISTINCT f.id,f.path,f.create_time,d.detection_photo_index_id FROM file f,detection_photo d WHERE f.id = d.photo AND detection_photo_index_id = 2 ORDER BY f.create_time DESC";
+    public void search() throws SQLException, IOException {
+        String sql="SELECT DISTINCT f.id,f.path,f.create_time,d.detection_photo_index_id FROM file f,detection_photo d WHERE f.id = d.photo  ORDER BY f.create_time DESC";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         ResultSet resultSet= preparedStatement.executeQuery();
         int i=0;
-        ExecutorService executorService= Executors.newFixedThreadPool(30);
+        File file=new File("c:\\Users\\Administrator\\Desktop\\imagefile.txt");
+        FileWriter fileWriter=new FileWriter(file);
+        int j=0;
+        System.out.println(resultSet.getFetchSize());
         while (resultSet.next()){
-            System.out.print(resultSet.getString("id")+"   ");
-            System.out.print(resultSet.getString("path")+"   ");
-            System.out.print(resultSet.getString("create_time")+"   ");
-            System.out.println();
-            String imageUrl = resultSet.getString("path");
-            String savePath=imageUrl.substring(imageUrl.indexOf("group"),imageUrl.lastIndexOf("/"));
-            System.out.println(savePath);
-            String fileName=imageUrl.substring(imageUrl.lastIndexOf("/")+1);
-            System.out.println(fileName);
-            DownloadThread downloadThread=new DownloadThread(imageUrl,fileName,"d:\\image\\"+savePath);
-            executorService.execute(downloadThread);
-            i++;
-            if (i>10){
-                break;
+            j++;
+            String path = resultSet.getString("path");
+            System.out.println(j+"  "+path);
+            String lastName=path.substring(36);
+            String MName="";
+            char c = path.charAt(34);
+            if (c=='A'){
+                MName="10";
+            }else if (c=='B'){
+                MName="11";
+            }else{
+                MName=""+c;
             }
+            System.out.println(c);
+            System.out.println(lastName);
+            String filePath="/alfa/whut/data"+MName+"/fastdfs/data/"+lastName;
+            System.out.println(filePath);
+            fileWriter.write(filePath);
+            fileWriter.write("\r\n");
+            i++;
+//            if (i>3000){
+//                break;
+//            }
+        }
+        System.out.println("总个数:"+i);
+        fileWriter.close();
+    }
+    public void search(Integer id) throws SQLException, IOException {
+//        String sql="SELECT DISTINCT f.id,f.path,f.create_time,d.detection_photo_index_id FROM file f,detection_photo d WHERE f.id = d.photo  ORDER BY f.create_time DESC";
+        String sql="SELECT  DISTINCT f.id,d.id as detection_id, f.path,f.create_time,dp.detection_photo_index_id FROM detection d, file f,detection_photo dp WHERE d.id=dp.detection_id and  f.id = dp.photo  ORDER BY f.create_time DESC";
+        PreparedStatement preparedStatement = conn.prepareStatement(sql);
+        ResultSet resultSet= preparedStatement.executeQuery();
+        int i=0;
+        System.out.println(resultSet.getFetchSize());
+        while (resultSet.next()){
+            String detection_id = resultSet.getString("detection_id");
+            String id1 = resultSet.getString("id");
+            String path = resultSet.getString("path");
+            String create_time = resultSet.getString("create_time");
+            String detection_photo_index_id = resultSet.getString("detection_photo_index_id");
+            System.out.println(detection_id+" "+id+" "+path+" "+create_time+" "+detection_photo_index_id+" ");
         }
         System.out.println("总个数:"+i);
     }
     public static void main(String[] args) throws Exception {
         ImageDao imageDao=new ImageDao();
-        imageDao.search();
+        imageDao.search(1);
     }
 }

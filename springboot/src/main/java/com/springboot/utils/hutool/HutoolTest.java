@@ -8,15 +8,24 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.format.FastDateFormat;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.IdcardUtil;
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.http.HttpUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 /**
@@ -138,6 +147,21 @@ public class HutoolTest {
         mailAccount.setPass("shu123456789");
         MailUtil.send(mailAccount,"616048151@qq.com", "测试", "shuxibing 给你发邮件了", false);
     }
+
+
+    @Test
+    public void httpTest(){
+        String url="https://face.ceks100.com/group1/M01/73/82/cx2hu1mOYvCAYzC3AFzP43a0kF0803.jpg";
+        HttpResponse  httpResponse= HttpRequest.get(url).execute();
+        if (httpResponse.getStatus()==200){
+            File file=new File("c:\\Users\\Administrator\\Desktop\\data\\temp.jpg");
+            httpResponse.writeBody(file);
+            System.out.println("返回成功");
+        }else {
+            System.out.println("请求失败");
+        }
+    }
+
 
 
 

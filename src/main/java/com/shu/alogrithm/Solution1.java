@@ -16,10 +16,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class Solution1 {
     public static void main(String[] args) {
-        String str="NXWtnzyoHoBhUJaPauJaAitLWNMlkKwDYbbigdMMaYfkVPhGZcrEwp";
-        System.out.println(str.length());
-        int index= FirstNotRepeatingChar("NXWtnzyoHoBhUJaPauJaAitLWNMlkKwDYbbigdMMaYfkVPhGZcrEwp");
-        System.out.println(index);
+        char c = FirstAppearingOnce();
+        System.out.println(c);
+
     }
 
     public static class ListNode {
@@ -30,6 +29,82 @@ public class Solution1 {
             this.val = val;
         }
     }
+
+    public void reOrderArray(int [] array) {
+        Stack<Integer> stack1=new Stack<>();
+        Stack<Integer> stack2=new Stack<>();
+        for (int i=0;i<array.length;i++){
+            int num=array[i];
+            if(num%2==0){
+                //偶数
+                stack1.push(num);
+            }else {
+                //基数
+                stack2.push(num);
+            }
+        }
+        for (int i=array.length;i>=0;i--){
+            if (!stack1.empty()){
+                Integer pop = stack1.pop();
+                array[i]=pop;
+            }else {
+                Integer pop = stack2.pop();
+                array[i]=pop;
+            }
+        }
+
+    }
+
+
+    public static char FirstAppearingOnce()
+    {
+        String s1="google";
+        Map<Character,Integer> map=new LinkedHashMap<>();
+        for (int i=0;i<s1.length();i++){
+            char c = s1.charAt(i);
+            if (!map.containsKey(c)){
+                map.put(c,1);
+            }else {
+                Integer integer = map.get(c);
+                map.put(c,integer+1);
+            }
+        }
+
+        for (Character key : map.keySet()) {
+            Integer integer = map.get(key);
+            if (integer==1){
+                return key;
+            }
+        }
+        return '#';
+    }
+
+
+    public int[] multiply(int[] A) {
+       int[] C=new int[A.length];
+       int[] B=new int[A.length];
+       C[0]=A[0];
+        for (int i=1;i<A.length;i++){
+            C[i]=C[i-1]*A[i];
+        }
+
+        int j=0;
+        int k=A.length-1;
+        boolean flag=false;
+        for (int i=A.length-1;i>=0;i--){
+            if (flag){
+                B[k]=C[i];
+                k--;
+                flag=false;
+            }else {
+                B[j]=C[i];
+                j++;
+                flag=true;
+            }
+        }
+        return B;
+    }
+
 
     public static ListNode reverseListNode(ListNode head) {
         if (head == null) {

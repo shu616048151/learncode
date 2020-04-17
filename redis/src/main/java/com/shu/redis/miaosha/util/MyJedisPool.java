@@ -27,8 +27,8 @@ public class MyJedisPool {
 //		        config.setBlockWhenExhausted(true);
 
 		        //本机
-				jedisPool = new JedisPool(config,"127.0.0.1",6379,3000);
-//				jedisPool = new JedisPool(config,"kdgg.d9lab.net",6479,3000,"D9Lab171829");
+//				jedisPool = new JedisPool(config,"127.0.0.1",6379,3000);
+				jedisPool = new JedisPool(config,"kdgg.d9lab.net",6479,3000,"D9Lab171829");
 				//阿里云
 //				jedisPool = new JedisPool(config,"101.200.59.105",6379,3000,"shuxibing");
 
