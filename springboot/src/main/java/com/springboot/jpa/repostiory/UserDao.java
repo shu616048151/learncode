@@ -13,7 +13,7 @@ import java.util.List;
  * @uint d9lab
  * @Description:
  */
-//@Repository
+@Repository
 public interface UserDao extends CrudRepository<User,Integer> {
 
     List<User> findByUserName(String usernName);

@@ -3,6 +3,8 @@ package com.springboot.model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,17 +20,12 @@ import java.util.Properties;
  * @uint d9lab
  * @Description:
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @PropertySource(value = "classpath:hello.properties")
 @RestController
 public class HelloApp {
     public static void main(String[] args) throws IOException {
-//        Properties properties=new Properties();
-//        InputStream inputStream=HelloApp.class.getClassLoader().getResourceAsStream("application-hello.properties");
-//        properties.load(inputStream);
-//        SpringApplication springApplication=new SpringApplication(HelloApp.class);
-//        springApplication.setDefaultProperties(properties);
-//        springApplication.run(args);
+
         SpringApplication.run(HelloApp.class,args);
     }
 
