@@ -10,7 +10,10 @@
     <modules>
         <module>handlerspringframework</module>
         <module>springboot</module>
-        <module>springbootlinux</module>
+        <module>elasticsearch</module>
+        <module>fastdfs</module>
+        <module>redis</module>
+        <module>quartz-learn</module>
     </modules>
 
     <!--默认打包方式为jar 一般不用pom-->
