@@ -3,7 +3,7 @@ package com.shu.springframework.test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-
+import org.csource.common.NameValuePair;
 /**
  * @Author shuxibing
  * @Date 2020/3/11 15:24
