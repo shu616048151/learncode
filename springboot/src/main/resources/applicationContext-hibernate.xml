@@ -99,7 +99,7 @@
     <context:com.shu.springframework.annotation-config/>
 
 
-    <bean id="userDao" class="com.springboot.hibernate.dao.UserDaoImpl">
+    <bean id="userDao" class="com.shu.hibernate.dao.UserDaoImpl">
         <property name="hibernateTemplate" ref="hibernateTemplate"></property>
     </bean>
 

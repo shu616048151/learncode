@@ -13,12 +13,10 @@
         http://www.springframework.org/schema/tx
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:com.shu.springframework.annotation-config></context:com.shu.springframework.annotation-config>
     <aop:aspectj-autoproxy/>
 
     <context:component-scan base-package="com.shu"></context:component-scan>
 
-    <tx:com.shu.springframework.annotation-driven/>
 
     <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
     <context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
@@ -70,7 +68,7 @@
         <property name="password" value="${slave.jdbc.password}"/>
     </bean>
     <!--数据库主从,动态切换数据源-->
-    <bean id="dataSource" class="com.springboot.spring.divide_read_write.db.DynamicDataSource">
+    <bean id="dataSource" class="com.shu.spring.divide_read_write.db.DynamicDataSource">
         <property name="targetDataSources">
             <map key-type="java.lang.String">
                 <entry key="slave" value-ref="slaveDataSource"/>
@@ -78,7 +76,7 @@
         </property>
         <property name="defaultTargetDataSource" ref="masterDataSource"/>
     </bean>
-    <bean id="dataSourceAdvice" class="com.springboot.spring.divide_read_write.db.DataSourceAspect"/>
+    <bean id="dataSourceAdvice" class="com.shu.spring.divide_read_write.db.DataSourceAspect"/>
     <aop:config>
         <aop:advisor pointcut="execution(public * com.shu..*service..*.*(..))" advice-ref="dataSourceAdvice"/>
     </aop:config>
