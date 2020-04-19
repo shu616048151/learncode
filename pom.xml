@@ -14,6 +14,9 @@
         <module>fastdfs</module>
         <module>redis</module>
         <module>quartz-learn</module>
+        <module>springcloud</module>
+        <module>springcloud-client</module>
+        <module>springcloud-rpc</module>
     </modules>
 
     <!--默认打包方式为jar 一般不用pom-->
@@ -69,20 +72,8 @@
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!--&lt;!&ndash;elasticsearch依赖&ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-data-elasticsearch</artifactId>-->
-            <!--<version>1.5.9.RELEASE</version>-->
-            <!--<scope>provided</scope>-->
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>com.google.guava</groupId>-->
-                    <!--<artifactId>guava</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        <!--</dependency>-->
 
+        <!--lombok插件-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -351,6 +342,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-netflix-eureka-client</artifactId>
+            <version>2.1.1.RELEASE</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

@@ -1,0 +1,16 @@
+#eureka的端口号
+server:
+  port: 8091
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8889/eureka/
+
+
+spring:
+  application:
+    name: rpc-server
+
+feign:
+  hystrix:
+    enabled: true
