@@ -1,6 +1,6 @@
 #eureka的端口号
 server:
-  port: 8889
+  port: 9889
 eureka:
   instance:
     hostname: localhost
@@ -8,4 +8,7 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8889/eureka/
+spring:
+  application:
+    name: eureka-server

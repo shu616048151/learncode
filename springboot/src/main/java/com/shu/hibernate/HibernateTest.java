@@ -24,7 +24,7 @@ public class HibernateTest{
     public void before(){
         applicationContext=new ClassPathXmlApplicationContext("classpath:applicationContext-hibernate.xml");
          userDao = applicationContext.getBean(UserDao.class);
-         hibernateTemplate=applicationContext.getBean(HibernateTemplate.class);
+//         hibernateTemplate=applicationContext.getBean(HibernateTemplate.class);
     }
     @Test
     public void add() throws Exception {
