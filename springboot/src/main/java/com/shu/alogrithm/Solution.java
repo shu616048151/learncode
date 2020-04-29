@@ -327,21 +327,15 @@ public class Solution {
 
 
     public int maxSubArray(int[] nums) {
-        if (nums.length==1){
-            return nums[0];
+        int n = nums.length;
+        int currSum = nums[0], maxSum = nums[0];
+
+        for(int i = 1; i < n; ++i) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(maxSum, currSum);
         }
-        int temp=0;
-        int max=nums[0];
-        for (int i=0;i<nums.length;i++){
-           temp=temp+nums[i];
-           if (temp<0){
-               temp=0;
-           }
-           if (temp>max){
-               max=temp;
-           }
-        }
-        return max;
+        return maxSum;
+
     }
 
 
@@ -569,10 +563,6 @@ public class Solution {
 
     }
 
-    public static void main(String[] args){
-        System.out.println(uniquePaths(7,3));
-    }
-
     public static int uniquePaths(int m, int n) {
         int[][] num=new int[m][n];
         for(int i=0;i<m;i++){
@@ -590,11 +580,100 @@ public class Solution {
         return num[m-1][n-1];
     }
 
-    @Test
-    public void test1(){
-
-
+    /**
+     * 找出他们前n个字符串的共有的长度
+     * @param strs
+     * @return
+     */
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0){
+            return "";
+        }
+        String prefix = strs[0];
+        for (int i = 1; i < strs.length; i++) {
+            while (strs[i].indexOf(prefix) != 0) {
+                //慢慢缩减长度
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if (prefix.isEmpty()) {
+                    return "";
+                }
+            }
+        }
+        return prefix;
     }
+
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        int length  = 0;
+        ListNode first = head;
+        while (first != null) {
+            length++;
+            first = first.next;
+        }
+        length -= n;
+        first = dummy;
+        while (length > 0) {
+            length--;
+            first = first.next;
+        }
+        first.next = first.next.next;
+        return dummy.next;
+    }
+
+
+    public static boolean isPalindrome(int x) {
+        String s=String.valueOf(x);
+        int i=0;
+        int j=s.length()-1;
+        while (i<j){
+            if (s.charAt(i)==s.charAt(j)){
+                i++;
+                j--;
+            }else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args){
+        System.out.println(isPalindrome(121));
+    }
+
+
+    public boolean isValid(String s) {
+        if (s.length()%2==1){
+            return false;
+        }
+        Stack<Character> stack=new Stack<Character>();
+        for (int i=0;i<s.length();i++){
+            if (s.charAt(i)=='('||s.charAt(i)=='{'||s.charAt(i)=='['){
+                stack.push(s.charAt(i));
+                continue;
+            }
+            if (s.charAt(i)==')'){
+                if (stack.empty()||stack.pop()!='('){
+                    return false;
+                }
+            } if (s.charAt(i)=='}'){
+                if (stack.empty()||stack.pop()!='{'){
+                    return false;
+                }
+            } if (s.charAt(i)==']'){
+                if (stack.empty()||stack.pop()!='['){
+                    return false;
+                }
+            }
+        }
+        if (stack.empty()){
+            return true;
+        }
+        return false;
+    }
+
+
 
 
 
