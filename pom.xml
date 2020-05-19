@@ -13,10 +13,11 @@
         <module>elasticsearch</module>
         <module>fastdfs</module>
         <module>redis</module>
-        <module>quartz-learn</module>
-        <module>springcloud</module>
+        <module>task</module>
+        <module>springcloud-server</module>
         <module>springcloud-client</module>
         <module>springcloud-rpc</module>
+        <module>springcloud-server01</module>
     </modules>
 
     <!--默认打包方式为jar 一般不用pom-->

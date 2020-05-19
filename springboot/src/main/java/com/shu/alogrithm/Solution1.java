@@ -5,6 +5,7 @@ import org.springframework.boot.env.YamlPropertySourceLoader;
 import sun.net.NetHooks;
 
 import java.awt.image.Kernel;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,11 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description: 牛客网的LeetCode的算法知识
  */
 public class Solution1 {
-    public static void main(String[] args) {
-        char c = FirstAppearingOnce();
-        System.out.println(c);
 
-    }
 
     public static class ListNode {
         int val;
@@ -347,6 +344,91 @@ public class Solution1 {
         System.out.print("2");
     }
 
+    public boolean isPalindrome(int x) {
+        if (x < 0){
+            return false;
+        }
+        String str=String.valueOf(x);
+        int i=0;
+        int j=str.length()-1;
+        while (i<j){
+            if (str.charAt(i) == str.charAt(j)){
+                i++;
+                j--;
+            }else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head=new ListNode(0);
+        ListNode temp=head;
+
+        return null;
+    }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int i=0;
+        int j=0;
+        int count=1;
+        int length1 = nums1.length;
+        int length2 = nums2.length;
+        while (i<length1 && j<length2){
+            if ((length1+length2)%2 == 0){
+                //为偶数
+                if (count == (length1+length2)/2){
+                    return ((double) nums1[i]+(double)nums2[j])/2;
+                }
+            }else {
+                //为奇数
+                if (count == (length1+length2+1)/2){
+                    return Math.max(nums1[i],nums2[j]);
+                }
+            }
+
+            if (nums1[i]>nums2[j]){
+                if (j == length2-1){
+                    i++;
+                }else {
+                    j++;
+                }
+            }else {
+                if (i == length1-1){
+                    j++;
+                }else {
+                    i++;
+                }
+            }
+
+            count++;
+
+        }
+        return 0;
+    }
+
+
+    public int reverse(int x) {
+        int rev = 0;
+        while (x != 0) {
+            int pop = x % 10;
+            x /= 10;
+            if (rev > Integer.MAX_VALUE/10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) return 0;
+            if (rev < Integer.MIN_VALUE/10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) return 0;
+            rev = rev * 10 + pop;
+        }
+        return rev;
+
+    }
+
+    public static void main(String[] args){
+        String str1=String.valueOf(Integer.MAX_VALUE);
+        System.out.println(str1);
+        System.out.println(str1.compareTo("646324351"));
+//        System.out.println(Integer.valueOf("9646324351").intValue());
+    }
 
 
 
