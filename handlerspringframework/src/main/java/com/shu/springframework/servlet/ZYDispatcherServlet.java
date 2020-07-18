@@ -28,13 +28,13 @@ import java.util.*;
  */
 public class ZYDispatcherServlet extends HttpServlet {
 
-    private Map<String,Object> ioc=new HashMap<>();
+    private Map<String,Object> ioc=new HashMap<String, Object>();
 
     private Properties p=new Properties();
 
-    private List<String> classNames=new ArrayList<>();
+    private List<String> classNames=new ArrayList<String>();
 
-    private Map<String,Method> handlerMapping=new HashMap<>();
+    private Map<String,Method> handlerMapping=new HashMap<String, Method>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
