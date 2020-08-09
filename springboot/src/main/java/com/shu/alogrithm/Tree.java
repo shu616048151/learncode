@@ -1,5 +1,6 @@
 package com.shu.alogrithm;
 
+import java.sql.Ref;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,15 +28,23 @@ public class Tree {
     }
 
     public int minDepth(TreeNode root) {
-        if (root == null){
+        if (root == null) {
             return 0;
         }
-        if ((root.left == null) && (root.right == null)){
+
+        if ((root.left == null) && (root.right == null)) {
             return 1;
         }
-        int left = minDepth(root.left);
-        int right = minDepth(root.right);
-        return Math.min(left,right)+1;
+
+        int min_depth = Integer.MAX_VALUE;
+        if (root.left != null) {
+            min_depth = Math.min(minDepth(root.left), min_depth);
+        }
+        if (root.right != null) {
+            min_depth = Math.min(minDepth(root.right), min_depth);
+        }
+
+        return min_depth + 1;
     }
 
     public boolean isSameTree(TreeNode p, TreeNode q) {
@@ -85,4 +94,72 @@ public class Tree {
         dfs(root.right,sum,list,listList);
         list.remove(list.size()-1);
     }
+
+
+
+
+    public int nthUglyNumber(int n) {
+        int a=0,b=0,c=0;
+        int[] num=new int[n];
+        num[0]=1;
+        for (int i=1;i<n;i++){
+            int n2=num[a]*2;
+            int n3=num[b]*3;
+            int n5=num[c]*5;
+            num[i]=Math.min(Math.min(n2,n3),n5);
+            if (num[i] == n2){
+                a++;
+            }
+            if (num[i] == n3){
+                b++;
+            }
+            if (num[i] == n5){
+                c++;
+            }
+        }
+        return num[n-1];
+    }
+
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        int[] num=new int[n];
+        int[] len=new int[primes.length];
+
+        for (int i=0;i<n;i++){
+            for(int j=0;j<primes.length;j++){
+                
+            }
+
+        }
+
+        return num[n-1];
+
+    }
+
+    public boolean isUgly(int num) {
+        if (num == 0){
+            return  false;
+        }
+        while (num != 1){
+            if (num%2 == 0 || num%3==0 || num%5==0){
+                if (num%2==0){
+                    num=num/2;
+                }
+                if (num%3== 0){
+                    num=num/3;
+                }
+                if (num%5==0){
+                    num=num/5;
+                }
+
+            }else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
+
 }
