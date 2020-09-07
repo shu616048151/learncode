@@ -1,5 +1,10 @@
 package com.shu.alogrithm;
 
+import org.hibernate.sql.OracleJoinFragment;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author shuxibing
  * @date 2019/12/14 9:55
@@ -23,12 +28,14 @@ package com.shu.alogrithm;
  */
 public class DynamicProgramming {
     public static void main(String[] args){
-       int[] w={3,5,2,6,4};
-       int[] v={4,4,3,5,3};
-       int[] num={1,1,1,1,1};
-        System.out.println(package01(w,v,w.length,4));
-        System.out.println(packageFull(w,v,w.length,4));
-        System.out.println(packageMany(w,v,w.length,4,num));
+//       int[] w={3,5,2,6,4};
+//       int[] v={4,4,3,5,3};
+//       int[] num={1,1,1,1,1};
+//        System.out.println(package01(w,v,w.length,4));
+//        System.out.println(packageFull(w,v,w.length,4));
+//        System.out.println(packageMany(w,v,w.length,4,num));
+        System.out.println( longestCommonPrefix(new String[]{"abc","abd","ab"}));
+        longestCommonPrefix(new String[]{"abc","abcd","abcd","a"});
     }
 
 
@@ -229,4 +236,60 @@ public class DynamicProgramming {
         }
         return len;
     }
+
+
+    public static String longestCommonPrefix(String[] data){
+        String common=data[0];
+        for (int i=1;i<data.length;i++){
+            String temp=data[i];
+            common=getCommon(common,temp);
+        }
+        return common;
+    }
+
+    private static String getCommon(String common, String temp) {
+        byte[] bytes = common.getBytes();
+        byte[] bytes1 = temp.getBytes();
+        int commonIndex=0;
+        for (int i=0;i<Math.min(bytes.length,bytes1.length);i++){
+            if ( bytes[i] != bytes1[i]){
+                break;
+            }
+            if (bytes[i] == bytes1[i]){
+                commonIndex=i;
+            }
+        }
+        return common.substring(0,commonIndex+1);
+    }
+
+
+
+    /**
+     *给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。
+     *
+     * 相邻的结点 在这里指的是 下标 与 上一层结点下标 相同或者等于 上一层结点下标 + 1 的两个结点。
+     * @Author shuxibing
+     * @UpdateDate 2020/9/7 14:51
+     * @Uint d9lab
+     * @Description:  状态方程的变化
+     *
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+       int[][] dp=new int[triangle.size()][];
+       dp[0][0]=triangle.get(0).get(0);
+        for (int i=1;i<triangle.size();i++){
+            List<Integer> list = triangle.get(i);
+            for (int j=0;j<list.size();j++){
+                Integer data = list.get(j);
+                dp[i][j]=Math.min(dp[i-1][j-1],dp[i-1][j])+triangle.get(i).get(j);
+            }
+        }
+        //找出最小值
+        int min=Integer.MAX_VALUE;
+        for (int k=0;k<dp[triangle.size()].length;k++){
+           min=Math.min(min,dp[triangle.size()-1][k]);
+        }
+        return min;
+    }
+
 }

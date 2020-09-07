@@ -18,6 +18,11 @@ public class Tree {
      TreeNode(int x) { val = x; }
   }
 
+    /**
+     * 最大深度
+     * @param root
+     * @return
+     */
     public int maxDepth(TreeNode root) {
         if (root == null){
             return 0;
@@ -27,6 +32,11 @@ public class Tree {
         return Math.max(left,right)+1;
     }
 
+    /**
+     * 最低深度
+     * @param root
+     * @return
+     */
     public int minDepth(TreeNode root) {
         if (root == null) {
             return 0;
@@ -47,6 +57,15 @@ public class Tree {
         return min_depth + 1;
     }
 
+
+    /**
+     *
+     * @Author shuxibing
+     * @UpdateDate 2020/9/7 14:22
+     * @Uint d9lab
+     * @Description: 相同树形
+     *
+     */
     public boolean isSameTree(TreeNode p, TreeNode q) {
         if (p == null && q == null){
             return true;
@@ -59,6 +78,7 @@ public class Tree {
         }
         return isSameTree(p.right,q.right)&&isSameTree(p.left,q.left);
     }
+
 
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null){
@@ -77,6 +97,14 @@ public class Tree {
         return lists;
     }
 
+    /**
+     *
+     * @Author shuxibing
+     * @UpdateDate 2020/9/7 14:22
+     * @Uint d9lab
+     * @Description:  回溯算法搜素
+     *
+     */
     public void dfs(TreeNode root,int sum ,List<Integer> list,List<List<Integer>> listList){
         //回溯算法+深度搜索
         if (root == null){
@@ -97,66 +125,6 @@ public class Tree {
 
 
 
-
-    public int nthUglyNumber(int n) {
-        int a=0,b=0,c=0;
-        int[] num=new int[n];
-        num[0]=1;
-        for (int i=1;i<n;i++){
-            int n2=num[a]*2;
-            int n3=num[b]*3;
-            int n5=num[c]*5;
-            num[i]=Math.min(Math.min(n2,n3),n5);
-            if (num[i] == n2){
-                a++;
-            }
-            if (num[i] == n3){
-                b++;
-            }
-            if (num[i] == n5){
-                c++;
-            }
-        }
-        return num[n-1];
-    }
-
-    public int nthSuperUglyNumber(int n, int[] primes) {
-        int[] num=new int[n];
-        int[] len=new int[primes.length];
-
-        for (int i=0;i<n;i++){
-            for(int j=0;j<primes.length;j++){
-                
-            }
-
-        }
-
-        return num[n-1];
-
-    }
-
-    public boolean isUgly(int num) {
-        if (num == 0){
-            return  false;
-        }
-        while (num != 1){
-            if (num%2 == 0 || num%3==0 || num%5==0){
-                if (num%2==0){
-                    num=num/2;
-                }
-                if (num%3== 0){
-                    num=num/3;
-                }
-                if (num%5==0){
-                    num=num/5;
-                }
-
-            }else {
-                return false;
-            }
-        }
-        return true;
-    }
 
 
 
