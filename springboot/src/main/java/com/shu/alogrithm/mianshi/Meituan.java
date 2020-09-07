@@ -1,4 +1,4 @@
-package com.shu.alogrithm;
+package com.shu.alogrithm.mianshi;
 
 import com.hankcs.hanlp.classification.features.DfFeatureData;
 import org.junit.Test;
@@ -118,9 +118,11 @@ public class Meituan {
     }
 
 
+    //回溯算法
     public static void dfs(int[][] data, int start, List<Integer> list, ArrayList<String> out){
         for (int i=0;i<data[start].length;i++){
             if (data[start][i] == 1){
+                //边界条件
                 if(i == list.get(0)){
 //                    System.out.println(list.get(0));
                     //形成环路
@@ -133,8 +135,7 @@ public class Meituan {
                     return;
                 }
                 if (list.contains(i)){
-                    //去除重复线路,跳过
-                    continue;
+                        continue;
                 }
                 list.add(i);
 //                System.out.println("添加："+i);

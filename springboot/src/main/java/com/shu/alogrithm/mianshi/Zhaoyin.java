@@ -1,4 +1,4 @@
-package com.shu.alogrithm;
+package com.shu.alogrithm.mianshi;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.shu.alogrithm;
+package com.shu.alogrithm.test;
 
 import java.util.Scanner;
 

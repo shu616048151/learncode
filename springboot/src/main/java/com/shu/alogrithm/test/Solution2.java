@@ -1,4 +1,4 @@
-package com.shu.alogrithm;
+package com.shu.alogrithm.test;
 
 
 import java.util.*;
@@ -266,7 +266,6 @@ public class Solution2 {
        return set;
 
     }
-
 
 
 }
