@@ -275,21 +275,90 @@ public class DynamicProgramming {
      *
      */
     public int minimumTotal(List<List<Integer>> triangle) {
-       int[][] dp=new int[triangle.size()][];
+        int n=triangle.size();
+       int[][] dp=new int[n][n];
        dp[0][0]=triangle.get(0).get(0);
-        for (int i=1;i<triangle.size();i++){
-            List<Integer> list = triangle.get(i);
-            for (int j=0;j<list.size();j++){
-                Integer data = list.get(j);
+        for (int i=1;i<n;++i){
+            dp[i][0] = dp[i - 1][0] + triangle.get(i).get(0);
+            for (int j=1;j<i;++j){
                 dp[i][j]=Math.min(dp[i-1][j-1],dp[i-1][j])+triangle.get(i).get(j);
             }
+            dp[i][i] = dp[i - 1][i - 1] + triangle.get(i).get(i);
         }
         //找出最小值
-        int min=Integer.MAX_VALUE;
-        for (int k=0;k<dp[triangle.size()].length;k++){
-           min=Math.min(min,dp[triangle.size()-1][k]);
+        int min=dp[n-1][0];
+        for (int k=1;k<n;k++){
+           min=Math.min(min,dp[n-1][k]);
         }
         return min;
+    }
+
+
+    /**
+     *有路障的情况下，路线设置问题
+     * @Author shuxibing
+     * @UpdateDate 2020/9/7 17:51
+     * @Uint d9lab
+     * @Description:
+     *
+     */
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int[][] dp=new int[obstacleGrid.length][obstacleGrid[0].length];
+        if (obstacleGrid[0][0] ==1){
+            dp[0][0]=0;
+        }else {
+            dp[0][0]=1;
+        }
+        //初始化路径数据
+        for (int j=1;j<obstacleGrid[0].length;j++){
+            if (obstacleGrid[0][j]==1){
+                dp[0][j]=0;
+            }else {
+                dp[0][j]=dp[0][j-1];
+            }
+        }
+        for (int i=1;i<obstacleGrid.length;i++){
+            if (obstacleGrid[i][0]==1){
+                dp[i][0]=0;
+            }else {
+                dp[i][0]=dp[i-1][0];
+            }
+        }
+
+
+        for(int i=1;i<obstacleGrid.length;i++){
+            for (int j=1;j<obstacleGrid[i].length;j++){
+                //此路不通直接设置0
+                if (obstacleGrid[i][j] == 1){
+                    dp[i][j]=0;
+                }else {
+                    dp[i][j]=dp[i][j-1]+dp[i-1][j];
+                }
+            }
+        }
+
+        return dp[obstacleGrid.length-1][obstacleGrid[0].length-1];
+    }
+
+    public int minPathSum(int[][] grid) {
+        int[][] dp=new int[grid.length][grid[0].length];
+
+        dp[0][0]=grid[0][0];
+        for (int i=1;i<grid.length;i++){
+            dp[i][0]=dp[i-1][0]+grid[i][0];
+        }
+
+        for (int j=1;j<grid[0].length;j++){
+            dp[0][j]=dp[0][j-1]+grid[0][j];
+        }
+
+        for (int i=1; i<grid.length;i++){
+            for (int j=1;j<grid[0].length;j++){
+                dp[i][j]=Math.min(dp[i][j-1],dp[i-1][j])+grid[i][j];
+            }
+        }
+
+        return dp[grid.length-1][grid[0].length-1];
     }
 
 }

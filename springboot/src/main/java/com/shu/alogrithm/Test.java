@@ -294,6 +294,99 @@ public class Test {
         }
         return true;
     }
+
+
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer,Integer> map=new TreeMap<Integer, Integer>();
+       for (int i=0; i<nums.length; i++){
+           int num=nums[i];
+           if (map.containsKey(num)){
+               map.put(num,map.get(num)+1);
+           }else {
+               map.put(num,1);
+           }
+       }
+
+
+        // int[] 的第一个元素代表数组的值，第二个元素代表了该值出现的次数
+        PriorityQueue<int[]> queue = new PriorityQueue<int[]>(new Comparator<int[]>() {
+            @Override
+            public int compare(int[] m, int[] n) {
+                return m[1] - n[1];
+            }
+        });
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int num = entry.getKey(), count = entry.getValue();
+            if (queue.size() == k) {
+                if (queue.peek()[1] < count) {
+                    queue.poll();
+                    queue.offer(new int[]{num, count});
+                }
+            } else {
+                queue.offer(new int[]{num, count});
+            }
+        }
+        int[] ret = new int[k];
+        for (int i = 0; i < k; ++i) {
+            ret[i] = queue.poll()[0];
+        }
+        return ret;
+
+    }
+
+
+       public static String longestPalindrome(String s){
+        if (s.length() <2 ){
+            return s;
+        }
+        int begin=0;
+        int len=1;
+        byte[]  chars=s.getBytes();
+        for (int i=0;i<chars.length;i++){
+            for (int j=i+1;j<chars.length;j++){
+                if (j-i+1 >len && validPalindromic(chars,i,j)){
+                    begin=i;
+                    len=j-i+1;
+                }
+            }
+        }
+
+        return s.substring(begin,begin+len);
+    }
+
+    private static boolean validPalindromic(byte[] chars, int i, int j) {
+        while (i < j){
+            if (chars[i] != chars[j]){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+
+    public int threeSumClosest(int[] nums, int target) {
+        int min=Integer.MAX_VALUE;
+        int sum=0;
+
+        for (int i=0;i<nums.length;i++){
+            for (int j=i+1;j<nums.length;j++){
+                for (int k=j+1; k<nums.length;k++){
+                    if (Math.abs(target-nums[i]-nums[j]-nums[k])<min){
+                        min=Math.abs(target-nums[i]-nums[j]-nums[k]);
+                        sum=nums[i]+nums[j]+nums[k];
+                    }
+                }
+            }
+        }
+        return sum;
+    }
+
+
+
+
+
 }
 
 

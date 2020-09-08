@@ -1,5 +1,7 @@
 package com.shu.alogrithm;
 
+import java.util.List;
+
 /**
  * @Author shuxibing
  * @Date 2020/4/25 16:01
@@ -23,4 +25,9 @@ package com.shu.alogrithm;
  */
 public class BackTrace {
 
+
+
+    public static void backtrack(int[] nums, int first, List<Integer> list,List<List<Integer>> out){
+
+    }
 }

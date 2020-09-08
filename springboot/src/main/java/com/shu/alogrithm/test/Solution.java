@@ -674,6 +674,33 @@ public class Solution {
     }
 
 
+    public ListNode sortList(ListNode head) {
+        ListNode temp=null;
+        ListNode pre=null;
+        ListNode out=new ListNode(0);
+        ListNode outHead=out;
+        ListNode min=new ListNode(Integer.MAX_VALUE);
+        while (head != null){
+            ListNode listNode=head.next;
+            while (listNode !=null){
+                if (listNode.val < min.val){
+                    //取出单个节点
+                    temp=pre;
+                    min=listNode;
+                    min.next=null;
+                }
+                pre=listNode;
+                listNode=listNode.next;
+            }
+            //去除最小节点
+            if (temp!=null &&temp.next != null){
+                temp.next=temp.next.next;
+            }
+            out.next=min;
+            out=outHead.next;
+        }
+        return outHead.next;
+    }
 
 
 

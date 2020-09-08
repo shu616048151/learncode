@@ -14,27 +14,6 @@ public class Bzhan2021 {
 
     }
 
-    class Solution {
-        // dp[m][n] = min(dp[m-1][n], dp[m][n-1]) + g[m][n]
-        public int minPathSum(int[][] g) {
-            if (g == null || g[0] == null)  return 0;
-            int h = g.length, w = g[0].length;
-            int[][] dp = new int[h][w];
-            dp[0][0] = g[0][0];
-            for (int i = 0; i < h; i++)
-                for (int j = 0; j < w; j++) {
-                    if (i == 0 && j == 0)
-                        continue;
-                    if (i == 0)
-                        dp[i][j] = dp[i][j-1] + g[i][j];
-                    else if (j == 0)
-                        dp[i][j] = dp[i-1][j] + g[i][j];
-                    else
-                        dp[i][j] = Math.min(dp[i-1][j], dp[i][j-1]) + g[i][j];
-                }
-            return dp[h-1][w-1];
-        }
-    }
 
 
     public static void test1(int[] data){

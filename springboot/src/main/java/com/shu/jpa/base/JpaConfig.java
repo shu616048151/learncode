@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @Description: jpa的一些配置信息
  */
 @Configuration
-@EnableJpaRepositories(basePackages = "com.springboot.jpa.repostiory") //扫包和注解方式都可以实现
+@EnableJpaRepositories(basePackages = "com.shu.jpa.repostiory") //扫包和注解方式都可以实现
 public class JpaConfig {
 }
