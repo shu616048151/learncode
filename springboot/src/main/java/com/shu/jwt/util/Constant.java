@@ -1,4 +1,4 @@
-package com.shu.jwt;
+package com.shu.jwt.util;
 
 import java.util.UUID;
 

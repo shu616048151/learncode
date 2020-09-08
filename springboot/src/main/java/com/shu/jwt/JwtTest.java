@@ -1,5 +1,6 @@
 package com.shu.jwt;
 
+import com.shu.jwt.util.Constant;
 import io.jsonwebtoken.*;
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
