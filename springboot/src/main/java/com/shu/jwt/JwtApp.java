@@ -38,9 +38,10 @@ public class JwtApp {
 
 
     @RequestMapping("/test/logout")
-    public void logout(Integer id, String password, HttpServletResponse response) throws Exception {
+    public String logout(Integer id, String password, HttpServletResponse response) throws Exception {
         JwtTest jwtTest=new JwtTest();
         String jwt = jwtTest.createJWT("" + id, "" + id, password, 1000);
         response.setHeader("token",jwt);
+        return "sddddd";
     }
 }

@@ -26,7 +26,7 @@ import java.util.Map;
  * HMACSHA512(base64UrlEncode(header) + "." +base64UrlEncode(payload),secret)
  * Created by macro on 2018/4/26.
  */
-//@Component
+@Component
 public class JwtTokenUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtTokenUtil.class);
     private static final String CLAIM_KEY_USERNAME = "sub";
