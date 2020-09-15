@@ -1,7 +1,10 @@
 package com.shu.alogrithm.test;
 
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Test;
+import org.springframework.boot.autoconfigure.social.FacebookAutoConfiguration;
 
+import javax.xml.crypto.Data;
 import java.util.*;
 
 /**
@@ -80,12 +83,6 @@ public class Solution {
         }
         list.remove(list.size()-1);
         return arrayList;
-
-    }
-
-
-    @Test
-    public void replaceSpace(StringBuffer str) {
 
     }
 
@@ -206,6 +203,9 @@ public class Solution {
     }
 
     public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
+        if (pHead1 == null || pHead2 == null){
+            return null;
+        }
         while (pHead1.val!=pHead2.val){
             pHead1=(pHead1==null? null:pHead1.next);
             pHead2=(pHead2==null? null:pHead2.next);
@@ -213,32 +213,17 @@ public class Solution {
         return pHead1;
     }
 
-    public static int LastRemaining_Solution(int n, int m) {
-        if(n<1||m<1) return -1;
-        int[] array = new int[n];
-        int i = -1,step = 0, count = n;
-        while(count>0){   //跳出循环时将最后一个元素也设置为了-1
-            i++;          //指向上一个被删除对象的下一个元素。
-            if(i>=n) i=0;  //模拟环。
-            if(array[i] == -1) continue; //跳过被删除的对象。
-            step++;                     //记录已走过的。
-            if(step==m) {               //找到待删除的对象。
-                array[i]=-1;
-                step = 0;
-                count--;
-            }
-        }
-        return i;//返回跳出循环时的i,即最后一个被设置为-1的元素
-
-    }
-
-
     public static class ListNode {
         int val;
         ListNode next = null;
 
         ListNode(int val) {
             this.val = val;
+        }
+
+        @Override
+        public String toString() {
+            return super.toString();
         }
     }
 
@@ -297,34 +282,6 @@ public class Solution {
         }
         return str1+str.substring(0,index);
     }
-
-
-
-
-    public ListNode deleteDuplication(ListNode pHead)
-    {
-        if (pHead==null){
-            return null;
-        }
-        if (pHead!=null&&pHead.next==null){
-            return pHead;
-        }
-        ListNode Head = new ListNode(0);
-        Head.next = pHead;
-        ListNode pre=pHead;
-        ListNode last=pHead;
-        while (last!=null){
-            while (last.next!=null&&last.val==last.next.val){
-               last=last.next;
-            }
-            pre=last.next;
-            last=last.next;
-        }
-        return Head.next;
-    }
-
-
-
 
     public int maxSubArray(int[] nums) {
         int n = nums.length;
@@ -638,10 +595,6 @@ public class Solution {
         return true;
     }
 
-    public static void main(String[] args){
-        System.out.println(isPalindrome(121));
-    }
-
 
     public boolean isValid(String s) {
         if (s.length()%2==1){
@@ -674,33 +627,276 @@ public class Solution {
     }
 
 
-    public ListNode sortList(ListNode head) {
-        ListNode temp=null;
-        ListNode pre=null;
-        ListNode out=new ListNode(0);
-        ListNode outHead=out;
-        ListNode min=new ListNode(Integer.MAX_VALUE);
-        while (head != null){
-            ListNode listNode=head.next;
-            while (listNode !=null){
-                if (listNode.val < min.val){
-                    //取出单个节点
-                    temp=pre;
-                    min=listNode;
-                    min.next=null;
-                }
-                pre=listNode;
-                listNode=listNode.next;
-            }
-            //去除最小节点
-            if (temp!=null &&temp.next != null){
-                temp.next=temp.next.next;
-            }
-            out.next=min;
-            out=outHead.next;
+
+
+    public static int cutRope(int target) {
+
+        int max=0;
+        for(int i=2;i<target;i++){
+            int n = target / i;
+            int y=target%i;
+            int temp=(int)(Math.pow(n,i-y)*Math.pow(n+1,y));
+            max=Math.max(temp,max);
         }
-        return outHead.next;
+
+        return max;
     }
+
+
+
+
+
+
+
+    public static int count(int[][] data,int num){
+        int len=data.length;
+        Set<Integer> set=new HashSet<>();
+        for (int i=0;i<data.length;i++){
+            for (int j=0;j<data[i].length;j++){
+
+                //顺时针的多只兔子
+                for (int n=i+1;n<i+num;n++){
+                    //取模进行计算,形成环状
+                    for (int m=0;m<data[n%len].length;m++){
+                        //两只兔子进行比较
+                        if (data[i][j] == data[n%len][m]){
+                            set.add(data[i][j]);
+                        }
+                    }
+
+                }
+            }
+        }
+
+       return set.size();
+    }
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode out=new ListNode(0);
+        ListNode head=out;
+        int in=0;
+        while (!(l1  == null && l2 == null)) {
+            int x = (l1 == null ? 0 : l1.val);
+            int y = (l2 == null ? 0 : l2.val);
+            int sum = x + y + in;
+            in = sum / 10;
+            ListNode listNode = new ListNode(sum % 10);
+            out.next = listNode;
+            out = out.next;
+
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+
+        if (in >0){
+            ListNode listNode = new ListNode(in);
+            out.next = listNode;
+        }
+        return head.next;
+    }
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode out=new ListNode(0);
+        ListNode head=out;
+        while(l1 != null || l2 !=null){
+            int x=(l1 == null?Integer.MAX_VALUE:l1.val);
+            int y=(l2 == null?Integer.MAX_VALUE:l2.val);
+            if (y < x){
+                ListNode listNode=new ListNode(y);
+                out.next=listNode;
+                out=out.next;
+                if (l2 != null){
+                    l2=l2.next;
+                }
+            }else {
+                ListNode listNode=new ListNode(x);
+                out.next=listNode;
+                out=out.next;
+                if (l1 != null){
+                    l1=l1.next;
+                }
+            }
+        }
+        return head.next;
+    }
+
+
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode head =null;
+        for (int i=0; i< lists.length;i++){
+            head=mergeTwoLists(head,lists[i]);
+        }
+        return head;
+    }
+
+
+
+    public int[][] merge(int[][] intervals) {
+        for(int i=0; i< intervals.length; i++){
+
+        }
+
+        return intervals;
+    }
+
+
+    public int numIslands(char[][] grid) {
+        int count=0;
+        for(int i=0;i<grid.length; i++){
+            for (int j=0; j<grid[i].length ;j++){
+                if (grid[i][j] == '1'){
+                    count++;
+                    dfs(i,j,grid);
+                }
+            }
+        }
+
+        return count;
+    }
+    public void dfs(int i, int j, char[][] data){
+        if (i<0 || i>=data.length || j<0 || j>= data[i].length || data[i][j] !='1'){
+            return;
+        }
+        data[i][j]='0';
+        dfs(i,j-1,data);
+        dfs(i,j+1,data);
+        dfs(i-1,j,data);
+        dfs(i+1,j,data);
+    }
+
+
+    public boolean canJump(int[] nums) {
+        int max=0;
+        for(int i=0; i<nums.length;i++){
+            if (i<=max){
+                max=Math.max(max,i+nums[i]);
+                if (max>=nums.length-1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean searchMatrix(int[][] matrix, int target) {
+        Integer m=null;
+        Integer n=null;
+
+        for (int i=0;i<matrix.length;i++){
+            for (int j=0;j<matrix[i].length;j++){
+                if (matrix[i][j] == target){
+                    m=i;
+                    n=j;
+                }
+            }
+        }
+        if (n==null && m==null){
+            //没有找到元素
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public int lengthOfLIS(int[] nums) {
+        if (nums.length<2){
+            return nums.length;
+        }
+        //动态规划备忘录，表示包含i的最大长度
+        int[] out=new int[nums.length];
+        int max=1;
+        for (int i=0;i<nums.length;i++){
+            out[i]=1;
+            for (int j=0;j<i;j++){
+                if (nums[i]>nums[j]){
+                    out[i]=Math.max(out[i],out[j]+1);
+                }
+                max=Math.max(max,out[i]);
+            }
+        }
+        return max;
+    }
+
+
+    public String decodeString(String s) {
+        String out="";
+        boolean instack=false;
+        Stack<Character> stack=new Stack<>();
+        for (int i=0;i<s.length();i++){
+            char c = s.charAt(i);
+            if (c>='0' && c<='9'){
+               instack=true;
+            }
+            //出栈
+            if (c==']'){
+                instack=false;
+                //开始出栈
+                String pingjie="";
+                String temp="";
+                char pop=stack.pop();
+                while(pop!='['){
+                    temp=pop+temp;
+                    pop=stack.pop();
+                }
+
+                //开始出栈数字
+                String num="";
+                pop=stack.pop();
+                while (!stack.empty() && (pop>='0'&& pop<='9')){
+                    num=pop+num;
+                    pop=stack.pop();
+                    if (!(pop>='0'&& pop<='9')){
+                        stack.push(pop);
+                    }
+                }
+                Integer n=Integer.valueOf(num);
+                //开始拼接字符串
+                while (n>0){
+//                    System.out.println(n);
+                    pingjie=pingjie+temp;
+                    n--;
+                }
+                //如果栈不为空，继续入栈
+                if (!stack.empty()){
+                    for (int k=0;k<pingjie.length();k++){
+                        stack.push(pingjie.charAt(k));
+                    }
+                }else {
+                    //为空直接拼接到out
+                    out=out+pingjie;
+                }
+
+                continue;
+            }
+            //进站
+            if (instack){
+                stack.push(c);
+            }else{
+                out=out+c;
+            }
+
+        }
+        return out;
+    }
+
+
+    @Test
+    public void test1111(){
+        System.out.println(decodeString("3[a2[c]]"));
+    }
+
+
+
+
+
 
 
 

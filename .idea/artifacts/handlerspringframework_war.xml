@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="handlerspringframework:war">
+    <output-path>$PROJECT_DIR$/handlerspringframework/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>handlerspringframework</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="handlerspringframework-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="handlerspringframework:war exploded" />
+    </root>
+  </artifact>
+</component>

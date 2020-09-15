@@ -386,6 +386,38 @@ public class Test {
 
 
 
+    public int StrToInt(String str) {
+        if("".equals(str)){
+            return 0;
+        }
+        int out=0;
+        boolean zheng=true;
+        for (int i=0;i<str.length();i++){
+            char c = str.charAt(i);
+            if (i == 0 && (c=='+'|| c=='-')){
+                if (c=='-'){
+                    zheng=false;
+                }
+                continue;
+            }
+            if (!(c >= '0' && c <= '9')){
+                return 0;
+            }
+            out=out*10+((int) c-48);
+
+        }
+        return zheng?out:-out;
+    }
+
+
+
+
+    @org.junit.Test
+    public void test111(){
+        Test test=new Test();
+        System.out.println(test.StrToInt("123"));
+    }
+
 
 }
 

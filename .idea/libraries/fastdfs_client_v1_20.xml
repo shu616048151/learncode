@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="fastdfs_client_v1.20">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/handlerspringframework/lib/fastdfs_client_v1.20.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

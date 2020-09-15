@@ -6,11 +6,60 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="spring" />
+        <module name="base" />
+        <module name="dubbo" />
+        <module name="dubbo-consumer" />
+        <module name="elasticsearch" />
+        <module name="fastdfs" />
+        <module name="handlerspringframework" />
+        <module name="HanLP" />
+        <module name="quartzlearn" />
+        <module name="redis" />
+        <module name="springboot" />
+        <module name="springcloud-server" />
+        <module name="springcloudclient" />
+        <module name="springcloudrpc" />
+        <module name="springcloudserver01" />
+        <module name="task" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="spring" target="1.5" />
+      <module name="base" target="1.8" />
+      <module name="dubbo" target="1.8" />
+      <module name="dubbo-consumer" target="1.8" />
+      <module name="elasticsearch" target="1.8" />
+      <module name="fastdfs" target="1.8" />
+      <module name="handlerspringframework" target="1.8" />
+      <module name="HanLP" target="1.5" />
+      <module name="learncode" target="1.8" />
+      <module name="quartzlearn" target="1.5" />
+      <module name="redis" target="1.8" />
+      <module name="spring" target="1.8" />
+      <module name="springboot" target="1.8" />
+      <module name="springbootlinux" target="1.8" />
+      <module name="springcloud" target="1.8" />
+      <module name="springcloud-server" target="1.8" />
+      <module name="springcloudclient" target="1.8" />
+      <module name="springcloudrpc" target="1.8" />
+      <module name="springcloudserver01" target="1.8" />
+      <module name="task" target="1.8" />
+      <module name="test" target="1.5" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="base" options="-parameters" />
+      <module name="dubbo" options="-parameters" />
+      <module name="dubbo-consumer" options="-parameters" />
+      <module name="elasticsearch" options="-parameters" />
+      <module name="fastdfs" options="-parameters" />
+      <module name="handlerspringframework" options="-parameters" />
+      <module name="redis" options="-parameters" />
+      <module name="spring" options="" />
+      <module name="springboot" options="-parameters" />
+      <module name="springcloud" options="" />
+      <module name="task" options="-parameters" />
+      <module name="test" options="" />
+    </option>
   </component>
 </project>
