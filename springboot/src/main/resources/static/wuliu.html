@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的搜索页</title>
+
+    <head>
+        <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    </head>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        /* 名称 */
+        .title{
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            color: cadetblue;
+            margin-top: 100px;
+            margin-bottom: 20px;
+            font-family: fantasy;
+        }
+
+        /* 下面是搜索框样式 */
+        .searchBox{
+            width: 40%;
+            height: 35px;
+            border: 1px solid cadetblue;
+            outline: hidden;
+            border-radius: 2px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .inputBox{
+            border: none;
+            width: 84%;
+            height: 35px;
+            line-height: 35px;
+            outline: none;
+            padding-left: 10px;
+            /* 改变光标的颜色 */
+            caret-color:#008B8B;
+            font-size: 14px;
+        }
+
+        .searchBtn{
+            width: 65px;
+            height: 35px;
+            border: none;
+            position: absolute;
+            right: 0;
+            outline: none;
+            color: white;
+            font-size: 15px;
+            background-color: cornflowerblue;
+        }
+
+        /* 鼠标滑过按钮时背景色改变 */
+        .searchBtn:hover{
+            background-color: #497fdf;
+        }
+    </style>
+</head>
+<body>
+<div class="title">
+    <p>物 &nbsp;流&nbsp; 查&nbsp; 询</p>
+</div>
+<div class="searchBox">
+    <input class="inputBox" placeholder="请输入单号">
+    <button class="searchBtn">搜索</button>
+    <br>
+    <ul id="#ul">
+    </ul>
+</div>
+
+<script >
+
+    $(function () {
+        $(".searchBtn").click(function () {
+            var url="https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&text=";
+            var val = $(".inputBox").val();
+            // $.post(url+val,{},function (data) {
+            //     console.info(data);
+            // })
+
+            $.ajax({
+                type:"get",
+                url:url+val,/*url写异域的请求地址*/
+                dataType:"jsonp",/*加上datatype*/
+                jsonpCallback:"cb",/*设置一个回调函数，名字随便取，和下面的函数里的名字相同就行*/
+                success:function(data){
+                    console.info(data);
+                    var auto=data.auto;
+                    console.info(auto[0]);
+
+                     // $.post("https://www.kuaidi100.com/chaxun?com="+auto[0].comCode+"&nu="+val,{},function (data) {
+                     //    console.info(data);
+                     // })
+
+                    // window.location.href="https://www.kuaidi100.com/chaxun?com="+auto[0].comCode+"&nu="+val;
+                    window.open("https://www.kuaidi100.com/chaxun?com="+auto[0].comCode+"&nu="+val);
+
+                    // $.ajax({
+                    //     type:"get",
+                    //     url:"https://www.kuaidi100.com/chaxun?com="+auto[0].comCode+"&nu="+val,/*url写异域的请求地址*/
+                    //     dataType:"jsonp",/*加上datatype*/
+                    //     jsonpCallback:"cb",/*设置一个回调函数，名字随便取，和下面的函数里的名字相同就行*/
+                    //     success:function(data){
+                    //     }
+                    // })
+
+                }
+
+            });
+        })
+
+
+
+        // $('.inputBox').on('input', function () {
+        //     var val = $(".inputBox").val();
+        //     console.info(val)
+        //
+        // })
+
+
+    })
+
+    // setInterval(function(){
+    //     var url="https://www.kuaidi100.com/autonumber/autoComNum?resultv2=1&text=";
+    //     var val = $(".inputBox").val();
+    //     $.ajax({
+    //         type:"get",
+    //         url:url+val,/*url写异域的请求地址*/
+    //         dataType:"jsonp",/*加上datatype*/
+    //         jsonpCallback:"cb",/*设置一个回调函数，名字随便取，和下面的函数里的名字相同就行*/
+    //         success:function(data){
+    //
+    //         }
+    //     })},500);
+
+    setInterval(function(){
+        var url="https://www.kuaidi100.com/query?type=zhongtong&postid=75379117524686&id=19&valicode=&temp="+Math.random()+"&phone=";
+        var val = $(".inputBox").val();
+        $.ajax({
+            crossDomain:true,
+            type:"get",
+            url:url+val,/*url写异域的请求地址*/
+            dataType:"json",/*加上datatype*/
+            jsonpCallback:"cb",/*设置一个回调函数，名字随便取，和下面的函数里的名字相同就行*/
+            success:function(data){
+                console.info(data)
+            }
+        })},1000);
+
+
+
+
+</script>
+
+</body>
+</html>

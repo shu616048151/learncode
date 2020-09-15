@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>仿google、百度搜索框输入信息智能提示的实现 兼容主流浏览器</title>
+    <style type="text/css" media="screen">
+        body
+        {
+            font: 11px arial;
+        }
+        .suggest_link
+        {
+            width:120px;
+            background-color: #FFFFFF;
+            padding: 2px 6px 2px 6px;
+        }
+        .suggest_link_over
+        {
+            width:120px;
+            background-color: #E8F2FE;
+            padding: 2px 6px 2px 6px;
+        }
+        #suggestResult
+        {
+            position: absolute;
+            background-color: #FFFFFF;
+            text-align: left;
+            border: 1px solid #000000;
+        }
+        /*input*/
+        .input_on
+        {
+            padding: 2px 8px 0pt 3px;
+            height: 18px;
+            border: 1px solid #999;
+            background-color: #FFFFCC;
+        }
+        .input_off
+        {
+            padding: 2px 8px 0pt 3px;
+            height: 18px;
+            border: 1px solid #CCC;
+            background-color: #FFF;
+        }
+        .input_move
+        {
+            padding: 2px 8px 0pt 3px;
+            height: 18px;
+            border: 1px solid #999;
+            background-color: #FFFFCC;
+        }
+        .input_out
+        {
+            /*height:16px;默认高度*/
+            padding: 2px 8px 0pt 3px;
+            height: 18px;
+            border: 1px solid #CCC;
+            background-color: #FFF;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+        var $ = document.getElementById;
+        //创建XMLHttpRequest对象
+        function createXMLHttpRequest() {
+            var obj;
+            if (window.XMLHttpRequest) { //Mozilla 浏览器
+                obj = new XMLHttpRequest();
+            }
+            else if (window.ActiveXObject) { // IE浏览器
+                try {
+                    obj = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        obj = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) { }
+                }
+            }
+            return obj;
+        }
+        //当输入框的内容变化时，调用该函数
+        function searchSuggest() {
+            var inputField = $("txtSearch");
+            var suggestText = $("suggestResult");
+            if (inputField.value.length > 0) {
+                var o = createXMLHttpRequest();
+                var url = "SearchResult.ashx?searchText=" + escape(inputField.value);
+                o.open("GET", url, true);
+                o.onreadystatechange = function () {
+                    if (o.readyState == 4) {
+                        if (o.status == 200) {
+                            var sourceItems = o.responseText.split("\n");
+                            if (sourceItems.length > 1) {
+                                suggestText.style.display = "";
+                                suggestText.innerHTML = "";
+                                for (var i = 0; i < sourceItems.length - 1; i++) {
+                                    var sourceText = sourceItems[i].split("@")[1];
+                                    var sourceValue = sourceItems[i].split("@")[0];
+                                    var s = "<div οnmοuseοver=\"javascript:suggestOver(this);\" ";
+                                    s += " οnmοuseοut=\"javascript:suggestOut(this);\" ";
+                                    s += " οnclick=\"javascript:setSearch('" + sourceText + "','" + sourceValue + "');\" ";
+                                    s += " class=\"suggest_link\" >" + sourceText + "</div>";
+                                    suggestText.innerHTML += s;
+                                }
+                            }
+                            else {
+                                suggestText.style.display = "none";
+                            }
+                        }
+                    }
+                };  //指定响应函数
+                o.send(null); // 发送请求
+            }
+            else {
+                suggestText.style.display = "none";
+            }
+        }
+
+        function delayExecute() {
+            $("valueResult").value = "";
+            window.setTimeout(function () { searchSuggest() }, 800);   //延时处理
+        }
+
+        function suggestOver(div_value) {
+            div_value.className = "suggest_link_over";
+        }
+        function suggestOut(div_value) {
+            div_value.className = "suggest_link";
+        }
+        function setSearch(a, b) {
+            $("txtSearch").value = a;
+            $("valueResult").value = b;
+            var div = $("suggestResult");
+            div.innerHTML = "";
+            div.style.display = "none";
+        }
+        function showResult() {
+            alert($("txtSearch").value + $("valueResult").value);
+        }
+
+
+    </script>
+</head>
+<body>
+<form id="form1" action="">
+    <input type="text" id="txtSearch" name="txtSearch" οnkeyup="delayExecute();" size="20"
+           class="input_out" οnfοcus="this.className='input_on';this.οnmοuseοut=''"
+           οnblur="this.className='input_off';this.οnmοuseοut=function(){this.className='input_out'};"
+           οnmοusemοve="this.className='input_move'" οnmοuseοut="this.className='input_out'" />
+    <input type="hidden" id="valueResult" name="valueResult" value="" />
+    <br />
+    <div id="suggestResult" style="display: none">
+    </div>
+    <br/>
+    <input id="button1" type="button" value="提交" οnclick="showResult();" />
+</form>
+</body>
+</html>
