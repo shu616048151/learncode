@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="base" />
+        <module name="docker" />
         <module name="dubbo" />
         <module name="dubbo-consumer" />
         <module name="elasticsearch" />
+        <module name="example" />
         <module name="fastdfs" />
         <module name="handlerspringframework" />
         <module name="HanLP" />
@@ -25,9 +27,11 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="base" target="1.8" />
+      <module name="docker" target="1.8" />
       <module name="dubbo" target="1.8" />
       <module name="dubbo-consumer" target="1.8" />
       <module name="elasticsearch" target="1.8" />
+      <module name="example" target="1.8" />
       <module name="fastdfs" target="1.8" />
       <module name="handlerspringframework" target="1.8" />
       <module name="HanLP" target="1.5" />
@@ -49,9 +53,11 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="base" options="-parameters" />
+      <module name="docker" options="-parameters" />
       <module name="dubbo" options="-parameters" />
       <module name="dubbo-consumer" options="-parameters" />
       <module name="elasticsearch" options="-parameters" />
+      <module name="example" options="-parameters" />
       <module name="fastdfs" options="-parameters" />
       <module name="handlerspringframework" options="-parameters" />
       <module name="redis" options="-parameters" />

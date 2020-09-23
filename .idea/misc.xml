@@ -13,10 +13,13 @@
         <option value="$PROJECT_DIR$/quartz-learn/pom.xml" />
         <option value="$PROJECT_DIR$/fastdfs/pom.xml" />
         <option value="$PROJECT_DIR$/dubbo/pom.xml" />
+        <option value="$PROJECT_DIR$/docker/pom.xml" />
+        <option value="$PROJECT_DIR$/example/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/hushshs/pom.xml" />
         <option value="$PROJECT_DIR$/wuliu/pom.xml" />
       </set>
     </option>
