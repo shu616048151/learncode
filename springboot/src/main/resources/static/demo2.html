@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <style>
+        .active {
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+        .text-danger {
+            background: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="example-3">
+        <p>{{date}}</p>
+        <p>{{shu}}</p>
+
+        <div v-html="message"></div>
+        <p v-if="seen">现在你看到我了</p>
+
+        <div v-bind:class="{ 'active': isActive }"></div>
+
+        <input v-model="input" @keyup.enter="submit">
+
+        <shu v-bind:item="parentMsg"></shu>
+    </div>
+
+
+
+    <div id = "app">
+        <p style = "font-size:25px;">计数器: {{ counter }}</p>
+        <button @click = "counter++" style = "font-size:25px;">点我</button>
+    </div>
+    <script type = "text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                counter: 1
+            }
+        });
+        //数字监听
+        vm.$watch('counter', function(nval, oval) {
+            alert('计数器值的变化 :' + oval + ' 变为 ' + nval + '!');
+        });
+    </script>
+</body>
+<script>
+
+    Vue.component('shu', {
+        props:['item'],
+        template: '<h1>{{item}}!</h1>'
+    }),
+    new Vue({
+        el: '#example-3',
+        data:{
+            parentMsg:'父组件内容',
+            message: '<h1>这是模板语法</h1>',
+            seen: false,
+            isActive: true,
+            input:0},
+        methods: {
+            say: function (message) {
+                alert(message)
+            },
+
+            submit:function () {
+                var input = this.input;
+                console.info(input)
+                alert("submit:"+input)
+            }
+        },
+        computed:{
+            date:function () {
+                return Date.now();
+            },
+
+            shu:function () {
+                return '我是hello';
+            }
+        }
+    })
+
+
+
+
+</script>
+</html>
