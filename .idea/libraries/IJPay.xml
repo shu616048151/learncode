@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="IJPay">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/springboot/lib/IJPay.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

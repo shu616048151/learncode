@@ -15,6 +15,7 @@
         <module name="fastdfs" />
         <module name="handlerspringframework" />
         <module name="HanLP" />
+        <module name="mybatisplus" />
         <module name="quartzlearn" />
         <module name="redis" />
         <module name="springboot" />
@@ -36,6 +37,7 @@
       <module name="handlerspringframework" target="1.8" />
       <module name="HanLP" target="1.5" />
       <module name="learncode" target="1.8" />
+      <module name="mybatisplus" target="1.8" />
       <module name="quartzlearn" target="1.5" />
       <module name="redis" target="1.8" />
       <module name="spring" target="1.8" />
@@ -60,6 +62,7 @@
       <module name="example" options="-parameters" />
       <module name="fastdfs" options="-parameters" />
       <module name="handlerspringframework" options="-parameters" />
+      <module name="mybatisplus" options="-parameters" />
       <module name="redis" options="-parameters" />
       <module name="spring" options="" />
       <module name="springboot" options="-parameters" />

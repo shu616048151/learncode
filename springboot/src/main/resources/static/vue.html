@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <p>{{ message }}</p>
+    <p>{{message | uppercase}}</p>
+    <input v-model="message">
+</div>
+
+<div id="app1">
+    <ul>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ul>
+</div>
+
+<div id="app2">
+    <ul id="example-2">
+        <li v-for="item in items">
+            {{ parentMessage }} - {{ $index }} - {{ item.message }}
+        </li>
+    </ul>
+</div>
+
+<h1 v-if="ok">Yes</h1>
+
+<div id="app3">
+    <h1>Hello, Vue.js!</h1>
+    <h1 v-show="yes">Yes!</h1>
+    <h1 v-show="no">No!</h1>
+    <h1 v-show="age >= 25">Age: {{ age }}</h1>
+    <h1 v-show="name.indexOf('jack') >= 0">Name: {{ name }}</h1>
+</div>
+
+
+<div id="app4">
+    <h1>Hello App!</h1>
+    <p>
+        <!-- 使用 router-link 组件来导航. -->
+        <!-- 通过传入 `to` 属性指定链接. -->
+        <!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+        <router-link to="/foo">Go to Foo</router-link>
+        <router-link to="/bar">Go to Bar</router-link>
+    </p>
+    <!-- 路由出口 -->
+    <!-- 路由匹配到的组件将渲染在这里 -->
+    <router-view></router-view>
+</div>
+
+
+</body>
+<script>
+
+    var vue=new Vue({
+        el:'#app',
+        data: {
+            message:'Hello World!'
+        }
+    });
+
+    var test=new Vue({
+        el: '#app1',
+        data: {
+            todos: [
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue.js' },
+                { text: 'Build Something Awesome' }
+            ]
+        }
+    })
+
+    var example2 = new Vue({
+        el: '#example-2',
+        data: {
+            parentMessage: '菜鸟教程官网',
+            items: [
+                { message: 'www.runoob.com' },
+                { message: 'www.runoob.com' }
+            ]
+        }
+    })
+
+    var vm = new Vue({
+        el: '#app3',
+        data: {
+            yes: true,
+            no: false,
+            age: 28,
+            name: 'jack1111'
+        }
+    })
+
+
+
+</script>
+</html>
