@@ -3,7 +3,6 @@ package com.shu.fastdfs.util;
 import org.apache.log4j.Logger;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
@@ -30,7 +29,4 @@ public class FileUtil {
         fileFastDfsUtil.delete(path);
     }
 
-    public static void  downloadZip(String[] httpurls, HttpServletResponse response){
-        fileFastDfsUtil.downloadZip(httpurls,response);
-    }
 }

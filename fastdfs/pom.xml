@@ -78,6 +78,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.16</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.csource</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.29-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/fastdfs-client-java-1.29-SNAPSHOT.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

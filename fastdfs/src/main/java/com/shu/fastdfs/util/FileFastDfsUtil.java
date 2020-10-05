@@ -6,29 +6,26 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.apache.commons.pool2.impl.GenericObjectPool;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.apache.log4j.Logger;
-import org.csource.common.IniFileReader;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.ResourceBundle;
-import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 
-public class FileFastDfsUtil {
+public class FileFastDfsUtil{
     private static Logger logger = Logger.getLogger(FileFastDfsUtil.class);
 
     private static String server;
     private static Boolean debug;
     private static String host;
-    private static String debug_host = "https://d9faceimages.d9lab.net/";
+    private static String debug_host = "http://39.108.180.232/";
     public static String getServer() {
         return server;
     }
@@ -72,29 +69,26 @@ public class FileFastDfsUtil {
             server = bundle.getString("server");
             debug = bundle.getString("debug").equals("true");
             host = bundle.getString("host");
-
-            logger.info("host:"+host);
-            logger.info("server:"+server);
-            logger.info("bould:"+bundle.toString());
             if(debug){//本地运行测试
                 host = debug_host;
             }
             /**初始化fdfs客户端连接池相关*/
-            String configFilePath = new File(FileFastDfsUtil.class.getClassLoader().
-                    getResource(CLIENT_CONFIG_FILE).getFile()).getCanonicalPath();
+            //优先采用properties方式读取配置文件
+            Properties properties=new Properties();
+            InputStream is = FileFastDfsUtil.class.getClassLoader().getResourceAsStream("fastdfs-client.properties");
+            properties.load(is);
 
-            System.out.println("configPath:"+configFilePath);
-
-            ClientGlobal.init(configFilePath);
+            ClientGlobal.initByProperties(properties);
             trackerClient = new TrackerClient();
-            IniFileReader iniFileReader = new IniFileReader(configFilePath);
-            reconnect_times = iniFileReader.getIntValue("reconnect_times", 3);
+            reconnect_times =3;
             GenericObjectPoolConfig config = new GenericObjectPoolConfig();
-            config.setMaxTotal(iniFileReader.getIntValue("pool_max_total", 8));
-            config.setMaxWaitMillis(iniFileReader.getIntValue("pool_max_wait", 10000));
+            config.setMaxTotal(8);
+            config.setMaxWaitMillis(10000);
             clientPool = new GenericObjectPool<StorageClient>(new ClientFactory(), config);
+
+
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
     }
 
@@ -102,7 +96,7 @@ public class FileFastDfsUtil {
 
         @Override
         public PooledObject<StorageClient> makeObject() throws Exception {
-            TrackerServer trackerServer = trackerClient.getConnection();
+            TrackerServer trackerServer = trackerClient.getTrackerServer();
             StorageServer storageServer = null;
             StorageClient storageClient = new StorageClient(trackerServer, storageServer);
             return new DefaultPooledObject<StorageClient>(storageClient);
@@ -142,7 +136,7 @@ public class FileFastDfsUtil {
                 clientPool.returnObject(storageClient);
                 break;
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
                 logger.warn("upload file fail, reconnecting...");
                 clientPool.returnObject(storageClient);
                 clientPool.invalidateObject(storageClient);
@@ -159,7 +153,7 @@ public class FileFastDfsUtil {
         String remoteFileName = uploadResults[1];
         logger.info("upload file successfully!!!\tfilename:" + file.getOriginalFilename() + "\tgroup_name:" + groupName
                 + "\tremoteFileName:" + remoteFileName);
-        return "https://"+host+uploadResults[0] + "/" + uploadResults[1];//返回存储路径以便写入数据库
+        return host+uploadResults[0] + "/" + uploadResults[1];//返回存储路径以便写入数据库
     }
 
     /**上传File文件*/
@@ -191,7 +185,7 @@ public class FileFastDfsUtil {
                 clientPool.returnObject(storageClient);
                 break;
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
                 logger.warn("upload file fail, reconnecting...");
                 clientPool.returnObject(storageClient);
                 clientPool.invalidateObject(storageClient);
@@ -205,7 +199,7 @@ public class FileFastDfsUtil {
             throw new Exception("上传FastDFS服务器失败");
         }
         String groupName = uploadResults[0];
-        String remoteFileName = "https://"+uploadResults[1];
+        String remoteFileName = uploadResults[1];
         logger.info("upload file successfully!!!\tfilename:" + file.getName() + "\tgroup_name:" + groupName
                 + "\tremoteFileName:" + remoteFileName);
         return host+uploadResults[0] + "/" + uploadResults[1];//返回存储路径以便写入数据库
@@ -227,7 +221,7 @@ public class FileFastDfsUtil {
                 clientPool.returnObject(storageClient);
                 break;
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
                 logger.warn("upload file fail, reconnecting...");
                 clientPool.returnObject(storageClient);
                 clientPool.invalidateObject(storageClient);
@@ -244,7 +238,7 @@ public class FileFastDfsUtil {
         String remoteFileName = uploadResults[1];
         logger.info("upload file successfully!!!\tfilename:" + file.getOriginalFilename() + "\tgroup_name:" + groupName
                 + "\tremoteFileName:" + remoteFileName);
-        return "https://"+host+uploadResults[0] + "/" + uploadResults[1];//返回存储路径以便写入数据库
+        return host+uploadResults[0] + "/" + uploadResults[1];//返回存储路径以便写入数据库
     }
 
     public void delete(String path) throws Exception {
@@ -260,7 +254,7 @@ public class FileFastDfsUtil {
                 clientPool.returnObject(storageClient);
                 break;
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage(), e);
                 logger.warn("delete file fail, reconnecting...");
                 clientPool.returnObject(storageClient);
                 clientPool.invalidateObject(storageClient);
@@ -275,29 +269,5 @@ public class FileFastDfsUtil {
         }
         logger.info("delete file successfully!!!\tfilename:" + path);
     }
-
-
-   public void downloadZip(String[] httpurls, HttpServletResponse response){
-       try {
-           StorageClient storageClient = clientPool.borrowObject();
-           ZipOutputStream zos=new ZipOutputStream(response.getOutputStream());
-           response.addHeader("Content-Disposition", "attachment;filename=" + UUID.randomUUID().toString().replace("-","")+".zip" );
-           for (String url:httpurls){
-               String remoteName=url.substring(url.indexOf("group"));
-               byte[] b=storageClient.download_file(remoteName.substring(0,6),remoteName.substring(remoteName.indexOf("M00")));
-               //向压缩包添加文件
-               zos.putNextEntry(new ZipEntry(remoteName.substring(remoteName.lastIndexOf("/")+1)));
-               zos.write(b,0,b.length);
-               logger.info("文件下载:"+url);
-           }
-           zos.flush();
-           zos.close();
-           response.getOutputStream().close();
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-
-
-   }
 
 }
