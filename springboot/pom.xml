@@ -14,6 +14,12 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.shu</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!-- 上边引入 parent，因此 下边无需指定版本 -->
         <!-- 包含 mvc,aop 等jar资源 -->
         <dependency>
