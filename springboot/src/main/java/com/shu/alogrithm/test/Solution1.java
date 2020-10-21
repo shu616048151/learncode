@@ -103,6 +103,14 @@ public class Solution1 {
     }
 
 
+    /**
+     *
+     * @Author shuxibing
+     * @Date 2020/10/20 15:42
+     * @Uint d9lab
+     * @Description:  链表反转
+     *
+     */
     public static ListNode reverseListNode(ListNode head) {
         if (head == null) {
             return head;
@@ -110,13 +118,46 @@ public class Solution1 {
         ListNode newhead = null;
         ListNode temp = null;
         while (head != null) {
+            //保存临时节点
             temp = head.next;
             head.next = newhead;
             newhead = head;
+            //重新赋值给头结点
             head = temp;
         }
         return newhead;
     }
+
+
+    public int[] reversePrint(ListNode head) {
+        ListNode listNode = reverseListNode(head);
+        List<Integer> list=new LinkedList<>();
+        while (listNode != null){
+            list.add(listNode.val);
+            listNode=listNode.next;
+        }
+        int[] out=new int[list.size()];
+        for (int i=0;i<list.size();i++){
+            out[i]=list.get(i);
+        }
+        return out;
+    }
+
+
+
+    public int findRepeatNumber(int[] nums) {
+        Set<Integer> set=new HashSet<>();
+        for (int i=0;i<nums.length;i++){
+            if (!set.contains(nums[i])){
+                set.add(nums[i]);
+            }else {
+                return nums[i];
+            }
+        }
+        return 0;
+    }
+
+
 
     public static ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         ArrayList<Integer> list = new ArrayList<>();

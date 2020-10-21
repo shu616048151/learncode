@@ -5,6 +5,7 @@
     <title>Title</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.1.0/axios.min.js"></script>
 
     <style>
         .active {
@@ -30,7 +31,10 @@
 
         <input v-model="input" @keyup.enter="submit">
 
-        <shu v-bind:item="parentMsg"></shu>
+        <!--直接绑定对应的属性-->
+        <shu v-bind:item="42"></shu>
+        <shu item="张三"></shu>
+        <shu item="张三"></shu>
     </div>
 
 

@@ -57,17 +57,17 @@ public class CodeGenerator {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://localhost:3306/mybatisplus?useUnicode=true&useSSL=false&characterEncoding=utf8");
+        dsc.setUrl("jdbc:mysql://kdsql.d9lab.net:3306/paycloud?useSSL=false&serverTimezone=Asia/Shanghai");
         // dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("123");
+        dsc.setUsername("whatie");
+        dsc.setPassword("D9Lab@171829");
         mpg.setDataSource(dsc);
 
         // 包配置
         PackageConfig pc = new PackageConfig();
         pc.setModuleName(scanner("用户模块"));
-        pc.setParent("com.shu.mybatisplus.auto");
+        pc.setParent("edu.whut.paycloud.pay");
         mpg.setPackageInfo(pc);
 
         // 自定义配置

@@ -118,7 +118,7 @@ public class Test {
                 max=Math.max(max,(height[m])*(n-m));
                 m++;
             }else {
-                max=Math.max(max,(height[m])*(n-m));
+                max=Math.max(max,(height[n])*(n-m));
                 n--;
             }
         }

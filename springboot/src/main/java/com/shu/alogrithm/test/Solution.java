@@ -345,9 +345,6 @@ public class Solution {
 
     }
 
-    public void solve(char[][] board) {
-
-    }
 
     /**
      * 这道题我们拿到基本就可以确定是图的 dfs、bfs 遍历的题目了。题目中解释说被包围的区间不会存在于边界上，所以我们会想到边界上的 OO 要特殊处理，只要把边界上的 OO 特殊处理了，那么剩下的 OO 替换成 XX 就可以了。问题转化为，如何寻找和边界联通的 OO，我们需要考虑如下情况。
@@ -724,6 +721,9 @@ public class Solution {
     }
 
 
+
+
+
     public ListNode mergeKLists(ListNode[] lists) {
         ListNode head =null;
         for (int i=0; i< lists.length;i++){
@@ -731,6 +731,8 @@ public class Solution {
         }
         return head;
     }
+
+
 
 
 
@@ -768,6 +770,13 @@ public class Solution {
     }
 
 
+    public int findKthLargest(int[] nums, int k) {
+
+      Arrays.sort(nums);
+      return nums[nums.length-1-k];
+    }
+
+
     public boolean canJump(int[] nums) {
         int max=0;
         for(int i=0; i<nums.length;i++){
@@ -801,6 +810,7 @@ public class Solution {
 
         return true;
     }
+
 
 
     public int lengthOfLIS(int[] nums) {

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.1.0/axios.min.js"></script>
+
+   
+</head>
+<body>
+
+
+
+    <div id = "app">
+        <button @click="test">开始点击</button>
+    </div>
+    <script type = "text/javascript">
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                counter: 1
+            },
+            methods:{
+                test:function(){
+                    axios.get("https://cdn.bootcdn.net/ajax/libs/axios/0.1.0/axios.min.js",{params:{name:'shushus',age:18}}).then(function (value) {
+                        console.info("成功")
+                    })
+
+
+                }
+
+            }
+        });
+        
+    </script>
+</body>
+<script>
+
+   
+
+
+</script>
+</html>

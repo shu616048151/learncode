@@ -1,6 +1,6 @@
 package com.shu.alogrithm;
 
-import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  * @Author shuxibing
@@ -19,18 +19,19 @@ public class Exchange {
     /**
      * 假设有 1 元，3 元，5 元的硬币若干（无限），现在需要凑出 11 元，问如何组合才能使硬币的数量最少？
      * 零钱数量无限 类似于完全背包问题
-     * @param coin
      */
-    public static int coinChange(int[] coin,int amount){
-        int[] dp=new int[amount+1];
-        for (int i=0; i< coin.length;i++){
-            for (int j=0;j<=amount;j++){
-                //类似于完全背包问题，一个硬币i可以使用多次
-                for (int k=0;k*coin[i]<=j;k++) {
-                    dp[j] = Math.min(dp[j], dp[j - k * coin[i]] + k);
+    public static int coinChange(int[] coins, int amount) {
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, max);
+        dp[0] = 0;
+        for (int i = 1; i <= amount; i++) {
+            for (int j = 0; j < coins.length; j++) {
+                if (coins[j] <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
                 }
             }
         }
-        return dp[amount] == 0 ? -1: dp[amount];
+        return dp[amount] > amount ? -1 : dp[amount];
     }
 }

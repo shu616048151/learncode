@@ -340,6 +340,8 @@ public class DynamicProgramming {
         return dp[obstacleGrid.length-1][obstacleGrid[0].length-1];
     }
 
+
+
     public int minPathSum(int[][] grid) {
         int[][] dp=new int[grid.length][grid[0].length];
 

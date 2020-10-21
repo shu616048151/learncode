@@ -9,7 +9,7 @@ package com.shu.alogrithm;
 public class Greedy {
 
     /**
-     * 贪心算法  股票最大利润
+     * 贪心算法  股票最大利润,多次交易
      * @param prices
      * @return
      */
@@ -18,7 +18,10 @@ public class Greedy {
         for (int i=1;i<prices.length;i++){
             out+=Math.max(0,prices[i]-prices[i-1]);
         }
-
-        return 0;
+        return out;
     }
+
+
+
+
 }
