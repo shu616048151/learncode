@@ -35,15 +35,6 @@
             <version>4.4.10</version>
         </dependency>
 
-        <!--&lt;!&ndash;本地的jar，添加到打包文件中&ndash;&gt;-->
-        <!--&lt;!&ndash;自己添加的jar&ndash;&gt;-->
-        <dependency>
-            <groupId>org.csource.fastdfs</groupId>
-            <artifactId>fastdfs</artifactId>
-            <version>1.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/fastdfs_client_v1.20.jar</systemPath>
-        </dependency>
     </dependencies>
 
 </project>

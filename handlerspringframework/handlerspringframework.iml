@@ -149,14 +149,5 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:5.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.10" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: org.csource.fastdfs:fastdfs:1.2">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/fastdfs_client_v1.20.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
   </component>
 </module>
