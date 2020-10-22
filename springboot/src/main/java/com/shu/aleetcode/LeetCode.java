@@ -11,6 +11,7 @@ import com.sun.deploy.util.VersionString;
 import org.junit.Test;
 import sun.plugin.javascript.navig.LinkArray;
 
+import javax.ws.rs.HEAD;
 import java.time.OffsetDateTime;
 import java.util.*;
 
@@ -468,6 +469,183 @@ public class LeetCode {
         Set<String> set=new HashSet<>();
         backtrace7(lists,set,list,0,nums);
         return lists;
+    }
+    
+    
+    /**
+     *
+     * @Author shuxibing
+     * @Date 2020/10/21 21:08
+     * @Uint d9lab
+     * @Description:
+     * 
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head ==null){
+            return head;
+        }
+        List<ListNode> listNodes=new LinkedList<>();
+        ListNode temp=head;
+        int n=0;
+        while (temp != null){
+            listNodes.add(temp);
+            temp =temp.next;
+            n++;
+        }
+        if (k>=n){
+            //取余数，防止循环过多
+            k=k%n;
+        }
+        ListNode outHead = listNodes.get((n - k)%n);
+        listNodes.get((n-1-k)%n).next=null;
+        for (int i=n-k;i<2*n-1-k;i++){
+            listNodes.get(i%n).next=listNodes.get((i+1)%n);
+        }
+        return outHead;
+    }
+
+
+
+    @Test
+    public void deleteDuplicatesTest(){
+        ListNode head=new ListNode(1);
+        head.next=new ListNode(2);
+        head.next.next=new ListNode(2);
+
+        ListNode listNode = deleteDuplicates(head);
+        System.out.println("打印返回值");
+        while (listNode !=null){
+            System.out.println(listNode.val);
+            listNode=listNode.next;
+        }
+    }
+
+    /**
+     *
+     * @Author shuxibing
+     * @Date 2020/10/21 21:28
+     * @Uint d9lab
+     * @Description: . 删除排序链表中的重复元素 II
+     *
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        List<ListNode> listNodes=new LinkedList<>();
+        ListNode temp=head;
+        Set<Integer> set=new HashSet<>();
+        while (temp != null){
+            if (!set.contains(temp.val)){
+                set.add(temp.val) ;
+                listNodes.add(new ListNode(temp.val));
+            }else {
+                //去掉上一个节点
+                if (listNodes.size() >0 && listNodes.get(listNodes.size()-1).val == temp.val){
+                    //防止出现的空的情况
+                    listNodes.remove(listNodes.size()-1);
+                }
+            }
+            temp =temp.next;
+        }
+        ListNode out=new ListNode(0);
+        ListNode temp1=out;
+        for (int i=0;i<listNodes.size();i++){
+            temp1.next=listNodes.get(i);
+            temp1=temp1.next;
+        }
+        return out.next;
+    }
+
+    public int getDecimalValue(ListNode head) {
+        int out=0;
+        while (head != null){
+            out=out*2 +head.val;
+            head=head.next;
+        }
+        return out;
+    }
+
+    public boolean isSubPath(ListNode head, TreeNode root) {
+        if (head == null){
+            return true;
+        }
+        if (root == null){
+            return false;
+        }
+
+        if (head.val == root.val){
+           return isSubPath(head.next,root.left) || isSubPath(head.next,root.right);
+        }
+        return false;
+    }
+
+
+
+    public ListNode removeDuplicateNodes(ListNode head) {
+        ListNode out=new ListNode(0);
+        ListNode temp=out;
+        Set<Integer> set=new HashSet<>();
+        while (head != null){
+            if (!set.contains(head.val)){
+                //新建节点，抛弃原来的连接方式
+                temp.next=new ListNode(head.val);
+                temp=temp.next;
+                set.add(head.val);
+            }
+            head=head.next;
+        }
+
+        return out.next;
+    }
+
+
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        List<ListNode> listNodeLinkedList=new ArrayList<>();
+        while (head !=null){
+            listNodeLinkedList.add(new ListNode(head.val));
+            head=head.next;
+        }
+        List<ListNode> listNodes11=new ArrayList<>(listNodeLinkedList);
+        for (int i=m;i<n;i++){
+            listNodeLinkedList.set(i-1,listNodes11.get(m+n-1-i));
+        }
+
+        ListNode out=new ListNode(0);
+        ListNode temp=out;
+        System.out.println(listNodeLinkedList.size());
+        for (int i=0;i<listNodeLinkedList.size();i++){
+            System.out.println(listNodeLinkedList.get(i).val);
+            temp.next=listNodeLinkedList.get(i);
+            temp=temp.next;
+        }
+        return out.next;
+
+    }
+
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode out=null;
+        while (headA != null) {
+            ListNode tempB=headB;
+            while (tempB !=null){
+                if (headA == tempB){
+                    return headA;
+                }
+                tempB=tempB.next;
+            }
+            headA=headA.next;
+        }
+        return null;
+    }
+
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode out=new ListNode(0);
+        ListNode temp=out;
+        while (head !=null){
+            if (head.val != val){
+                temp.next=new ListNode(head.val);
+                temp=temp.next;
+            }
+            head=head.next;
+        }
+        return out.next;
     }
 
     public void backtrace7(List<List<Integer>> listList,Set<String> set,List<Integer> list,int start,int[] nums){
@@ -1493,9 +1671,7 @@ public class LeetCode {
         return dp[text1.length()][text2.length()];
     }
 
-    public ListNode reverseBetween(ListNode head, int m, int n) {
-      return null;
-    }
+
 
 
     public int countNumbersWithUniqueDigits(int n) {

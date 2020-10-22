@@ -175,6 +175,7 @@ public class Tree {
      * @Date 2020/10/15 16:56
      * @Uint d9lab
      * @Description: 后序遍历
+     * 左子树 ---> 右节点 ---> 根节点
      *
      */
     public void postOrderTraverse1(TreeNode root) {
