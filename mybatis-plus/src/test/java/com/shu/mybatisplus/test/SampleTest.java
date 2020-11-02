@@ -4,6 +4,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.shu.mybatisplus.APP;
 import com.shu.mybatisplus.mapper.UserMapper;
 import com.shu.mybatisplus.model.User;
 import org.junit.Assert;
@@ -25,13 +26,16 @@ import java.util.Map;
  * @Description:  单元测试
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = APP.class)
 public class SampleTest {
 
     @Autowired
     private UserMapper userMapper;
 
 
+    /**
+     * 插入操作
+     */
     @Test
     public void testInsert() {
         System.out.println(("----- insert method test ------"));
@@ -44,6 +48,9 @@ public class SampleTest {
         System.out.println(i);
     }
 
+    /**
+     * 查询操作
+     */
     @Test
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
@@ -117,19 +124,24 @@ public class SampleTest {
     }
 
 
+    /**
+     * 删除操作
+     */
     @Test
     public void testDeleted() {
         System.out.println(("----- selectAll method test ------"));
-        int i = userMapper.deleteById(3);
+        int i = userMapper.deleteById(1);
         System.out.println(i);
     }
 
-
+    /**
+     * 修改操作
+     */
     @Test
     public void testUpdate() {
         System.out.println(("----- updateById method test ------"));
         User user=new User();
-        user.setId(1L);
+        user.setId(3L);
         user.setAge(18);
         user.setEmail("61048151@qq.com");
         user.setName("李四");
@@ -147,7 +159,8 @@ public class SampleTest {
         user.setName("李四");
 
         UpdateWrapper<User> userUpdateWrapper=new UpdateWrapper<>();
-        int i = userMapper.updateById(user);
+        userUpdateWrapper.lambda().eq(User::getId,1);
+        int i = userMapper.update(user,userUpdateWrapper);
         System.out.println(i);
     }
 
