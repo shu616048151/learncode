@@ -1,18 +1,8 @@
 package com.shu.aleetcode;
 
-import cn.hutool.json.JSONUtil;
-import com.alibaba.druid.sql.visitor.functions.Hex;
-import com.alibaba.druid.sql.visitor.functions.If;
-import com.graphbuilder.math.func.AbsFunction;
-import com.graphbuilder.math.func.PowFunction;
-import com.ijpay.wxpay.model.TransferModel;
-import com.shu.designpattern.adapter.Turkey;
-import com.sun.deploy.util.VersionString;
+import javafx.geometry.Pos;
 import org.junit.Test;
-import sun.plugin.javascript.navig.LinkArray;
 
-import javax.ws.rs.HEAD;
-import java.time.OffsetDateTime;
 import java.util.*;
 
 /**
@@ -309,6 +299,92 @@ public class LeetCode {
         return false;
     }
 
+//    public int countSubstrings(String s) {
+//        int count=0;
+//        boolean[][] dp=new boolean[s.length()][s.length()];
+//        for (int i=0;i<s.length();i++){
+//            dp[i][i]=true;
+//        }
+//        for (int i=0;i<s.length();i++){
+//            for (int j=i;j<s.length();j++){
+//                if (s.charAt(i) == s.charAt(j)){
+//                   if (j -i >=2 && dp[i+1][j-1]){
+//                       dp[i][j]=true;
+//                       count++;
+//                   }
+//                   if (j-i== 1 || i==j){
+//                       dp[i][j]=true;
+//                       count++;
+//                   }
+//                }
+//            }
+//        }
+//        return count;
+//    }
+
+
+    public String reverseLeftWords(String s, int n) {
+        String s1=s.substring(0,n);
+        String s2=s.substring(n);
+        return s2+s1;
+    }
+
+    public int minArray(int[] numbers) {
+        int min=numbers[0];
+        for (int i=1;i<numbers.length;i++){
+            if (min>numbers[i]){
+                return numbers[i];
+            }
+        }
+        return min;
+    }
+
+
+
+
+    public boolean isPalindrome1(String s){
+        int i=0;
+        int j=s.length()-1;
+        while (i<j){
+            if (s.charAt(i) != s.charAt(j)){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+
+
+    public int maxSumDivThree(int[] nums) {
+        int n = nums.length;
+
+        int[][] dp = new int[n+1][3];
+        dp[0][0] = 0;
+        dp[0][1] = Integer.MIN_VALUE;
+        dp[0][2] = Integer.MIN_VALUE;
+
+        for (int i = 1; i <= n; i++) {
+            if (nums[i-1] % 3 == 0) {
+                dp[i][0] = Math.max(dp[i-1][0], dp[i-1][0] + nums[i-1]);
+                dp[i][1] = Math.max(dp[i-1][1], dp[i-1][1] + nums[i-1]);
+                dp[i][2] = Math.max(dp[i-1][2], dp[i-1][2] + nums[i-1]);
+            } else if (nums[i-1] % 3 == 1) {
+                dp[i][0] = Math.max(dp[i-1][0], dp[i-1][2] + nums[i-1]);
+                dp[i][1] = Math.max(dp[i-1][1], dp[i-1][0] + nums[i-1]);
+                dp[i][2] = Math.max(dp[i-1][2], dp[i-1][1] + nums[i-1]);
+            } else if (nums[i-1] % 3 == 2) {
+                dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + nums[i-1]);
+                dp[i][1] = Math.max(dp[i-1][1], dp[i-1][2] + nums[i-1]);
+                dp[i][2] = Math.max(dp[i-1][2], dp[i-1][0] + nums[i-1]);
+            }
+        }
+        return dp[n][0];
+    }
+
+
+
     public boolean dfs(char[][] board,int i,int j,int[][] use,String s,int start){
 
         //首先判断出界情况
@@ -327,6 +403,400 @@ public class LeetCode {
         return b;
     }
 
+
+    public ListNode partition(ListNode head, int x) {
+        //链表转成数组
+        List<ListNode> listNodeList=new LinkedList<>();
+        while (head !=null){
+            listNodeList.add(new ListNode(head.val));
+            head=head.next;
+        }
+        //链表分离
+        List<ListNode> before=new LinkedList<>();
+        List<ListNode> after=new LinkedList<>();
+        for (int i=0;i<listNodeList.size();i++){
+            if (listNodeList.get(i).val <x){
+                before.add(listNodeList.get(i));
+            }else {
+                after.add(listNodeList.get(i));
+            }
+        }
+        before.addAll(after);
+        //链表重组
+        ListNode out=new ListNode(0);
+        ListNode temp=out;
+        for (int i=0;i<before.size();i++){
+            temp.next=before.get(i);
+            temp=temp.next;
+        }
+        return out.next;
+    }
+
+
+    public List<String> restoreIpAddresses(String s) {
+
+        List<String> outList=new ArrayList<>();
+        List<String> list=new ArrayList<>();
+        dfs(outList,list,s);
+        return outList;
+    }
+
+    /**
+     * 回溯算法加剪枝操作
+     * @param outList
+     * @param list
+     * @param s
+     */
+    public void dfs(List<String> outList,List<String> list,String s){
+        if ((s.length() ==0 && list.size() != 4) || (list.size() ==4 && s.length()!=0)){
+            return;
+        }
+        if (s.length() ==0 && list.size() ==4){
+            //过滤去除
+            String str="";
+            for (int i=0;i<list.size();i++){
+                String s1 = list.get(i);
+                if (Integer.valueOf(s1)>255 ||(s1.length()>1 && s1.startsWith("0"))){
+                    return;
+                }else {
+                    str+=s1+".";
+                }
+            }
+            outList.add(str.substring(0,str.length()-1));
+            return;
+        }
+        for (int i=1;i<=3;i++){
+            if (i<=s.length()){
+                list.add(s.substring(0,i));
+                dfs(outList,list,s.substring(i));
+                list.remove(list.size()-1);
+            }
+        }
+    }
+
+    public String largestNumber(int[] nums) {
+        String[] out=new String[nums.length];
+        for (int i=0;i<nums.length;i++){
+            out[i]=String.valueOf(nums[i]);
+
+        }
+
+        Arrays.sort(out, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                 o1=o1+o2;
+                 o2=o2+o1;
+                return o1.compareTo(o2);
+            }
+        });
+
+        String str="";
+        for (int i=out.length-1;i>=0;i--){
+            str+=out[i];
+        }
+        if (str.startsWith("0")){
+            return "0";
+        }
+        return str;
+    }
+
+
+
+    public int islandPerimeter(int[][] grid) {
+        for (int i=0;i<grid.length;i++){
+            for (int j=0;j<grid[0].length;j++){
+                if (grid[i][j] ==1){
+                    return dfs1(grid, i, j);
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    /**
+     *
+     * @Author shuxibing
+     * @Date 2020/11/2 11:05
+     * @Uint d9lab
+     * @Description:
+     *
+     */
+    public int translateNum(int num) {
+        List<String> list=new ArrayList<>();
+        List<Character> characterlist=new ArrayList<>();
+
+        dfs(list,characterlist,String.valueOf(num),0);
+        return list.size();
+    }
+
+    /**
+     * 变体的递归回溯算法，该算法需要指针向前移动
+     * @param list
+     * @param characterList
+     * @param s
+     * @param start
+     */
+    public void dfs(List<String> list, List<Character> characterList, String s,int start){
+        if (start>s.length()){
+            return;
+        }
+        if (start == s.length()){
+            String str="";
+            for (int i=0;i<characterList.size();i++){
+                str+=characterList.get(i);
+            }
+            System.out.println(str);
+            list.add(str);
+            return;
+        }
+
+        for (int j=1;j<=2;j++){
+            if (start+j<=s.length()){
+                String substring = s.substring(start, start + j);
+                if (Integer.valueOf(substring)>25 || (substring.length() ==2 && substring.startsWith("0"))){
+                    return;
+                }
+                int n=Integer.valueOf(s.substring(start,start+j));
+                //强行转成字符串
+                char c= (char) ('a'+(char)n);
+                characterList.add(c);
+                dfs(list,characterList,s,start+j);
+                characterList.remove(characterList.size()-1);
+            }
+        }
+
+    }
+
+
+
+    public int[] frequencySort(int[] nums) {
+        Arrays.sort(nums);
+        Map<Integer,Integer> map=new LinkedHashMap<>();
+        for (int i=0;i<nums.length;i++){
+            int n=nums[i];
+            if (map.containsKey(n)){
+                map.put(n,map.get(n)+1);
+            }else {
+                map.put(n,1);
+            }
+        }
+        //这里将map.entrySet()转换成list
+        List<Map.Entry<Integer,Integer>> list = new ArrayList<Map.Entry<Integer,Integer>>(map.entrySet());
+        //然后通过比较器来实现排序
+        Collections.sort(list,new Comparator<Map.Entry<Integer,Integer>>() {
+            //升序排序
+            @Override
+            public int compare(Map.Entry<Integer, Integer> o1,
+                               Map.Entry<Integer, Integer> o2) {
+                //频率相同，则按key降序排列
+                if (o1.getValue().equals( o2.getValue())){
+                    return o2.getKey()-o1.getKey();
+                }
+                return o1.getValue()-o2.getValue();
+            }
+
+        });
+
+        int k=0;
+        for (Map.Entry<Integer,Integer> entry:list){
+            for (int i=0;i<entry.getValue();i++){
+                nums[k]=entry.getKey();
+                k++;
+            }
+        }
+
+        return nums;
+    }
+
+    @Test
+    public void test11(){
+        // 默认情况，TreeMap按key升序排序
+        Map<String, Integer> map = new TreeMap<String, Integer>();
+        map.put("acb1", 5);
+        map.put("bac1", 3);
+        map.put("bca1", 20);
+        map.put("cab1", 80);
+        map.put("cba1", 1);
+        map.put("abc1", 10);
+        map.put("abc2", 12);
+
+        // 升序比较器
+        Comparator<Map.Entry<String, Integer>> valueComparator = new Comparator<Map.Entry<String,Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1,
+                               Map.Entry<String, Integer> o2) {
+                // TODO Auto-generated method stub
+                return o1.getValue()-o2.getValue();
+            }
+        };
+        // map转换成list进行排序
+        List<Map.Entry<String, Integer>> list = new ArrayList<Map.Entry<String,Integer>>(map.entrySet());
+        // 排序
+        Collections.sort(list,valueComparator);
+        // 默认情况下，TreeMap对key进行升序排序
+        System.out.println("------------map按照value升序排序--------------------");
+        for (Map.Entry<String, Integer> entry : list) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+        }
+    }
+
+
+    public int maxWidthOfVerticalArea(int[][] points) {
+        //排序,比较横坐标就可以了
+        List<Integer> list=new ArrayList<>();
+        for (int[] point : points) {
+            list.add(point[0]);
+        }
+        Collections.sort(list);
+        int max=Integer.MIN_VALUE;
+        for (int i=1;i<list.size();i++){
+            max=Math.max(max,list.get(i)-list.get(i-1));
+        }
+        return max;
+    }
+
+
+
+//    public int orangesRotting(int[][] grid) {
+//        int min=0;
+//        for (int i=0;i<grid.length;i++){
+//            for (int j=0;j<grid[0].length;j++){
+//                if (grid[i][j]==2){
+//                    min= dfs2(grid, i, j, 0);
+//                }
+//            }
+//        }
+//
+//        for (int i=0;i<grid.length;i++){
+//            for (int j=0;j<grid[0].length;j++){
+//                if (grid[i][j]==1){
+//                    return -1;
+//                }
+//            }
+//        }
+//
+//        return min;
+//    }
+//
+//    public int dfs2(int[][] grid,int i,int j,int minuts){
+//        if (i<0 || i>=grid.length || j<0 ||j>=grid[0].length ||grid[i][j] ==0 || grid[i][j] ==3){
+//            return minuts;
+//        }
+//        grid[i][j]=3;
+//        minuts=minuts+1;
+//        dfs2(grid,i-1,j,minuts);
+//        dfs2(grid,i+1,j,minuts);
+//        dfs2(grid,i,j-1,minuts);
+//        dfs2(grid, i, j + 1, minuts);
+//        return minuts;
+//    }
+
+    public int numJewelsInStones(String J, String S) {
+        Map<Character,Integer> map=new HashMap<>();
+        for (int i=0;i<S.length();i++){
+            Character c=S.charAt(i);
+            if (map.containsKey(c)){
+                map.put(c,map.get(c)+1);
+            }else {
+                map.put(c,1);
+            }
+        }
+        int sum=0;
+        for (int i=0 ;i<J.length();i++){
+            Character c=J.charAt(i);
+            if (map.containsKey(c)){
+                sum+=map.get(c);
+            }
+        }
+        return sum;
+    }
+    /**
+     * 计算每个节点周围其他节点，来判断是否可以计算周长
+     * @param grid
+     * @param i
+     * @param j
+     * @return
+     */
+    public int dfs1(int[][] grid,int i,int j ){
+        if (i<0 || i>= grid.length || j<0 || j>= grid[0].length ){
+            return 1;
+        }
+        if (grid[i][j] ==0){
+            return 1;
+        }
+        if (grid[i][j] != 1) {
+            return 0;
+        }
+        //每次增加两个
+        grid[i][j]=2;
+        return dfs1(grid,i-1,j)+dfs1(grid,i+1,j)+dfs1(grid,i,j+1)+dfs1(grid,i,j-1);
+    }
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode out=new ListNode(0);
+        ListNode temp=out;
+        int jin=0;
+        while (l1 != null || l2 !=null){
+            if (l1!=null && l2 !=null){
+                int n = l1.val + l2.val+jin;
+                jin=n/10;
+                temp.next=new ListNode(n%10);
+                temp=temp.next;
+                l1=l1.next;
+                l2=l2.next;
+                continue;
+            }
+            if (l1 == null && l2 !=null){
+                int n =  l2.val+jin;
+                jin=n/10;
+                temp.next=new ListNode(n%10);
+                temp=temp.next;
+                l2=l2.next;
+                continue;
+            }
+
+            if (l1 != null && l2 ==null){
+                int n =  l1.val+jin;
+                jin=n/10;
+                temp.next=new ListNode(n%10);
+                temp=temp.next;
+                l1=l1.next;
+                continue;
+            }
+        }
+        if (jin !=0){
+            temp.next=new ListNode(jin);
+            temp=temp.next;
+        }
+        return out.next;
+    }
+
+
+    /**
+     *
+     * @Author shuxibing
+     * @Date 2020/10/28 17:17
+     * @Uint d9lab
+     * @Description:
+     *
+     */
+    public int[] nextGreaterElements(int[] nums) {
+        int n=nums.length;
+        int[] out=new int[n];
+        Arrays.fill(out,-1);
+        for (int i=0;i<n;i++){
+            for (int j=i+1; j<i+n;j++){
+                if (nums[j%n]>nums[i]){
+                    out[i]=nums[j%n];
+                    //找到一个就可以退出
+                    break;
+                }
+            }
+        }
+        return out;
+    }
 
     public List<List<Integer>> generate(int numRows) {
         List<List<Integer>> lists=new ArrayList<>();
@@ -635,6 +1105,32 @@ public class LeetCode {
         return null;
     }
 
+    /**
+     *
+     * @Author shuxibing
+     * @Date 2020/10/22 14:53
+     * @Uint d9lab
+     * @Description:  474. 一和零
+     *
+     */
+    public int findMaxForm(String[] strs, int m, int n) {
+        int[][] dp = new int[m + 1][n + 1];
+        for (String s: strs) {
+            int[] count = countzeroesones(s);
+            for (int zeroes = m; zeroes >= count[0]; zeroes--)
+                for (int ones = n; ones >= count[1]; ones--)
+                    dp[zeroes][ones] = Math.max(1 + dp[zeroes - count[0]][ones - count[1]], dp[zeroes][ones]);
+        }
+        return dp[m][n];
+    }
+    public int[] countzeroesones(String s) {
+        int[] c = new int[2];
+        for (int i = 0; i < s.length(); i++) {
+            c[s.charAt(i)-'0']++;
+        }
+        return c;
+    }
+
     public ListNode removeElements(ListNode head, int val) {
         ListNode out=new ListNode(0);
         ListNode temp=out;
@@ -716,17 +1212,101 @@ public class LeetCode {
 
     public int cuttingRope(int n) {
         int max=1;
-        for (int i=1;i<n/2+1;i++){
+        //将绳子分成i段
+        for (int i=2;i<=n;i++){
+            //每段长度
             int chu = n / i;
             int yu = n % i;
-            if (yu == 0){
-
-            }
-            max=Math.max(max, (int)(Math.pow(i,chu-yu)*Math.pow(i+1,yu)));
+            max=Math.max(max, (int)(Math.pow(chu,i-yu)*Math.pow(chu+1,yu)));
         }
         return max;
     }
 
+    public int[] distributeCandies(int candies, int num_people) {
+        int[] out=new int[num_people];
+        int k=0;
+        int num=1;
+        while (candies>0){
+            if (candies<num){
+                out[k%num_people]= out[k%num_people]+candies;
+                candies=0;
+                //退出
+                break;
+            }else {
+                out[k%num_people]= out[k%num_people]+num;
+            }
+            //剩余糖果数量
+            candies=candies-num;
+            //当前小朋友分数量
+            num++;
+            k++;
+        }
+        return out;
+    }
+
+
+    public int movingCount(int m, int n, int k) {
+        int[][] nums=new int[m][n];
+        dfs(nums,0,0,k);
+        int sum=0;
+        for (int i=0;i<m;i++){
+            for (int j=0;j<n;j++){
+                if (nums[i][j] ==1){
+                    sum++;
+                }
+            }
+        }
+        return sum;
+    }
+
+
+    public List<Integer> partitionLabels(String S) {
+
+        return null;
+    }
+
+    public int findDuplicate(int[] nums) {
+        int i=0;
+        int j=0;
+        return 0;
+    }
+
+
+
+
+    /**
+     * i,j表示某个节点  搜索树问题
+     * @param nums
+     * @param i
+     * @param j
+     * @param k
+     */
+    public void dfs(int[][] nums,int i,int j,int k){
+        if (i< 0 || i>=nums.length || j<0 || j>=nums[0].length || nums[i][j] ==1 ||getDataSum(i,j) >k ){
+            return;
+        }
+        nums[i][j]=1;
+        dfs(nums,i+1,j,k);
+        dfs(nums,i-1,j,k);
+        dfs(nums,i,j+1,k);
+        dfs(nums,i,j-1,k);
+    }
+
+    public int getDataSum(int i,int j){
+        int sum=0;
+        sum+=i/10+i%10;
+        sum+=j/10+j%10;
+        return sum;
+    }
+
+    public ListNode middleNode(ListNode head) {
+        LinkedList<ListNode> listNodes = new LinkedList<>();
+        while (head != null) {
+            listNodes.add(head);
+            head = head.next;
+        }
+        return listNodes.get(listNodes.size()/2);
+    }
 
     public List<Integer> inorderTraversal(TreeNode root) {
        List<Integer> list=new ArrayList<>();
@@ -1444,6 +2024,57 @@ public class LeetCode {
         helper(root.right,listNode);
     }
 
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> lists=new ArrayList<>();
+        if (root == null){
+            return  lists;
+        }
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.offer(root);
+        while (queue.size() >0){
+            int size=queue.size();
+            List<Integer> list=new ArrayList<>();
+            for (int i=0;i<size;i++){
+                //队首的节点
+                //pop是出栈
+                TreeNode poll = queue.poll();
+                list.add(poll.val);
+                if (poll.left != null){
+                    queue.offer(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.offer(poll.right);
+                }
+            }
+            lists.add(list);
+        }
+
+        List<List<Integer>> out=new ArrayList<>();
+        for (int i=lists.size()-1;i>=0;i--){
+            out.add(lists.get(i));
+        }
+
+        return out;
+    }
+
+    public int videoStitching(int[][] clips, int T) {
+        int[] dp=new int[T+1];
+        Arrays.fill(dp,Integer.MAX_VALUE-1);
+        dp[0]=0;
+        for (int i=1;i<T+1;i++){
+            for (int j=0;j<clips.length;j++){
+               if (clips[j][0]<i && i<=clips[j][1]){
+                   //前一个片段的最小值
+                   dp[i]=Math.min(dp[i],dp[clips[j][0]]+1);
+               }
+            }
+        }
+        return dp[T] == Integer.MAX_VALUE-1 ? -1:dp[T];
+    }
+
+
+
+
 
     public int singleNumber(int[] nums) {
         for (int i=0;i<nums.length;i++){
@@ -1733,29 +2364,43 @@ public class LeetCode {
     public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> lists=new ArrayList<>();
         Set<String> set=new HashSet<>();
-        for (int i=0;i<nums.length;i++){
-            for (int j=i+1;j<nums.length;j++){
-                for (int k=j+1;k<nums.length;k++){{
-                    if(nums[i]+nums[j]+nums[k] == 0){
-                        List<Integer> list=new ArrayList<>();
-                        list.add(nums[i]);
-                        list.add(nums[j]);
-                        list.add(nums[k]);
-
-
-                        Collections.sort(list);
-                        if(!checkRE(lists,list)){
-                            lists.add(list);
-                        }
-                    }
-                }
-                }
-            }
-        }
+        List<Integer> list=new ArrayList<>();
+        backtrace8(lists,set,list,nums,0,3);
         return lists;
     }
 
-    private boolean checkRE(List<List<Integer>> lists, List<Integer> list) {
+
+    public void backtrace8(List<List<Integer>> listList,Set<String> set,List<Integer> list,int[] nums,int start,int n){
+        //剪枝操作
+        if (n<0){
+            return;
+        }
+        if (n == 0 ){
+            //排序去重
+            ArrayList<Integer> list1 = new ArrayList<>(list);
+            Collections.sort(list1);
+            String str="";
+            Integer sum=0;
+            for (int k=0;k<list1.size();k++){
+                str+=list1.get(k);
+                sum+=list1.get(k);
+            }
+
+            if (!set.contains(str) && sum == 0){
+                set.add(str);
+                listList.add(new ArrayList<>(list1));
+            }
+            return;
+        }
+        for (int i=start;i<nums.length;i++){
+            list.add(nums[i]);
+            backtrace8(listList,set,list,nums,i+1,n-1);
+            list.remove(list.size()-1);
+        }
+
+    }
+
+    private boolean checkExist(List<List<Integer>> lists, List<Integer> list) {
         for (List<Integer> integers : lists) {
             if (list.size() == integers.size()){
                 boolean f=true;
@@ -1830,6 +2475,31 @@ public class LeetCode {
             --right;
         }
         return true;
+    }
+
+
+    public int maxAreaOfIsland(int[][] grid) {
+        int maxArea=0;
+        for (int i=0;i<grid.length;i++){
+            for (int j=0;j<grid[0].length;j++){
+                int areaOfIsland = getAreaOfIsland(grid, i, j, 0);
+                maxArea= Math.max(maxArea,areaOfIsland);
+            }
+        }
+        return maxArea;
+    }
+
+    public int getAreaOfIsland(int[][] grid,int i,int j,int area){
+        if (i <0 || i>= grid.length || j<0 || j>=grid[0].length|| grid[i][j] == 0){
+            return area;
+        }
+        area=area+1;
+        grid[i][j]=0;
+        area = getAreaOfIsland(grid, i + 1, j, area);
+        area = getAreaOfIsland(grid, i - 1, j, area);
+        area = getAreaOfIsland(grid, i, j+1, area);
+        area = getAreaOfIsland(grid, i , j-1, area);
+        return area;
     }
 
 
@@ -2097,6 +2767,12 @@ public class LeetCode {
         return root;
      }
 
+
+
+     @Test
+    public void test111(){
+         System.out.println("1111".substring(4));
+     }
 
 
 

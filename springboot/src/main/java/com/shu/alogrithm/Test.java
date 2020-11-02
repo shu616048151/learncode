@@ -366,6 +366,12 @@ public class Test {
     }
 
 
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        return null;
+    }
+
+
     public int threeSumClosest(int[] nums, int target) {
         int min=Integer.MAX_VALUE;
         int sum=0;

@@ -14,8 +14,8 @@
           <element id="module-output" name="handlerspringframework" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="base-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="base" />
+          <element id="archive" name="common-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="common" />
           </element>
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:2.1.4.RELEASE" />

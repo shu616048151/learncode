@@ -224,4 +224,27 @@ public class Tree {
         }
     }
 
+
+    public int kthSmallest(TreeNode root, int k) {
+        TreeNode treeNode=new TreeNode(0);
+        inOrderTraversenew(root,k,treeNode);
+        return res;
+    }
+
+    int res=0;
+    int rank=0;
+    public void inOrderTraversenew(TreeNode root,int k ,TreeNode out) {
+        if (root == null) {
+            return;
+        }
+        inOrderTraversenew(root.left,k,  out);
+        rank++;
+        if (rank == k) {
+            System.out.print(root.val + "  ");
+            res = root.val;
+            return;
+        }
+
+        inOrderTraversenew(root.right,k,  out);
+    }
 }

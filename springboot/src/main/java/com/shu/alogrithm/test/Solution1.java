@@ -110,6 +110,8 @@ public class Solution1 {
      * @Uint d9lab
      * @Description:  链表反转
      *
+     * 也可以使用链表转成数组的方式进行重组
+     *
      */
     public static ListNode reverseListNode(ListNode head) {
         if (head == null) {

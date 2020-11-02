@@ -5,7 +5,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-
+/**
+ *
+ * @Author shuxibing
+ * @Date 2020/11/2 16:47
+ * @Uint d9lab
+ * @Description:
+ * 
+ */
 public class FileUtil {
     private static FileFastDfsUtil fileFastDfsUtil;
     private static Logger logger = Logger.getLogger(FileUtil.class);

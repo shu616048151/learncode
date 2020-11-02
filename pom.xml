@@ -14,11 +14,7 @@
         <module>fastdfs</module>
         <module>redis</module>
         <module>task</module>
-        <module>springcloud-server</module>
-        <module>springcloud-client</module>
-        <module>springcloud-rpc</module>
-        <module>springcloud-server01</module>
-        <module>base</module>
+        <module>common</module>
         <module>docker</module>
         <module>dubbo</module>
         <module>dubbo-consumer</module>

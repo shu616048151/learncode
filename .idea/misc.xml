@@ -22,6 +22,10 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/hushshs/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-client/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-rpc/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-server/pom.xml" />
+        <option value="$PROJECT_DIR$/springcloud-server01/pom.xml" />
         <option value="$PROJECT_DIR$/wuliu/pom.xml" />
       </set>
     </option>
