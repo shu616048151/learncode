@@ -1565,6 +1565,13 @@ public class LeetCode {
     }
 
 
+
+    public int[][] kClosest(int[][] points, int K) {
+
+
+        return null;
+    }
+
     /**
      * 先标注再次替换
      * @param board
