@@ -21,6 +21,10 @@ import java.util.concurrent.TimeUnit;
  * @date 2019/10/27 16:50
  * @uint d9lab
  * @Description:  RequestLimit接口处理类,采用redis做
+ *
+ * 使用滑动窗口限流方法
+ * 优点：可以细粒度控制每个ip每个接口的访问量，非常简单，对于小流量的项目非常友好
+ * 缺点：对于突发性的巨大流量，效果比较差
  */
 @Component
 @Aspect
@@ -42,7 +46,6 @@ public class RequestAspect {
         //请求参数名-值
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
-        String[] paramsKey = methodSignature.getParameterNames();
         Object[] paramsValue = joinPoint.getArgs();
 
         String message=requestLimitAnnotation.message();
@@ -52,30 +55,31 @@ public class RequestAspect {
         //正是上线可以调整
         long expireTime = 2;
 
-        Object result = null;
-        //对ip做校验
         //request对象
         HttpServletRequest request = (HttpServletRequest) paramsValue[0];
+        //对ip做校验
         String ip = IPUtil.getIpAddress(request);
 
         String requestURI = request.getRequestURI();
 
+        String key="requestLimit:" + requestURI + "-" + ip;
+
         Object object = redisTemplate.opsForValue().get("riskIp:" + ip);
         if (object!=null){
-            Boolean hasKey = redisTemplate.hasKey("requestLimit:" + requestURI + "-" + ip);
+            Boolean hasKey = redisTemplate.hasKey(key);
             if (hasKey==true){
                 //防止出现过期时间为-1的情况，强制删除
-                redisTemplate.delete("requestLimit:" + requestURI + "-" + ip);
+                redisTemplate.delete(key);
             }
             //用于提示信息
             throw new RequestLimitException(message);
         }
         if (object==null) {
             //利用redis的存活时间自动对request的请求进行检验
-            Integer requestCount = (Integer) redisTemplate.opsForValue().get("requestLimit:"+requestURI+"-" + ip);
+            Integer requestCount = (Integer) redisTemplate.opsForValue().get(key);
             if (requestCount == null||requestCount==0) {
                 logger.info("重新加入redisIp:"+ip);
-                redisTemplate.opsForValue().set("requestLimit:"+requestURI+"-" + ip, 1, second, TimeUnit.SECONDS);
+                redisTemplate.opsForValue().set(key, 1, second, TimeUnit.SECONDS);
                 return;
             }else {
                 if (requestCount >= maxCount) {
@@ -85,9 +89,9 @@ public class RequestAspect {
                     throw new RequestLimitException(message);
                 }else {
                     //开始放行
-                    redisTemplate.opsForValue().increment("requestLimit:"+requestURI+"-" + ip, 1);
+                    redisTemplate.opsForValue().increment(key);
                     logger.info("放行ip:"+ip);
-                    Long expire = redisTemplate.getExpire("requestLimit:" + requestURI + "-" + ip);
+                    Long expire = redisTemplate.getExpire(key);
                     logger.info("millexpire:"+expire);
                 }
             }

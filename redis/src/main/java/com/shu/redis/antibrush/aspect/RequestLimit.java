@@ -14,10 +14,11 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RequestLimit {
-
+    //窗口区间的最大访问量
    int maxCount() default 5;
+   //窗口单位
    int second() default 1;
-   //默认为五分钟
+   //关闭到小黑屋的时间
    long expireTime() default 5*60;
 
    //提示信息
