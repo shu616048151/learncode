@@ -17,7 +17,7 @@
         <!--使用utf-8编码-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--数据库相关-->
-        <mysql.version>8.0.16</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
 
     <dependencyManagement>
